@@ -1,0 +1,12 @@
+.nav {
+    grid-area: n;
+    background-color: navajowhite;
+}
+.item {
+    color: chocolate;
+    font-weight: bold;
+}
+.item.active {
+    color: maroon;
+    font-weight: bolder;
+}

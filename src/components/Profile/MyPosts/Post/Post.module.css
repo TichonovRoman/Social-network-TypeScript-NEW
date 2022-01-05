@@ -1,0 +1,7 @@
+.item {
+    color: maroon}
+.item img {
+    width: 50px;
+    border: 2px solid chocolate;
+    border-radius: 14px;
+}
