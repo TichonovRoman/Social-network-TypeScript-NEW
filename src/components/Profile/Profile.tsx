@@ -7,7 +7,7 @@ import MyPosts from "./MyPosts/MyPosts";
 
 const Profile:React.FC = () => {
     return (
-        <div className={s.content}>
+        <div>
 
             <div>
                 <img className={s.sunflowerImg} src={imgPicture}/>
