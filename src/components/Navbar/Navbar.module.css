@@ -1,12 +1,18 @@
 .nav {
     grid-area: n;
     background-color: navajowhite;
+    padding: 20px;
+    text-decoration: none;
 }
-.item {
+.item a {
     color: chocolate;
     font-weight: bold;
 }
-.item.active {
+/*.item a.active {*/
+/*    color: maroon;*/
+/*    font-weight: bolder;*/
+/*}*/
+
+.item a:hover, .item a:active, .item a:focus {
     color: maroon;
-    font-weight: bolder;
 }
