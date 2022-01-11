@@ -1,6 +1,30 @@
-.content {
-    grid-area: c;
-    background-color: bisque;
-    width: 840px;
+
+.dialogs {
+    display: grid;
+    grid-auto-columns: 2fr 10fr;
+    grid-template-areas:
+    "a b"
+}
+
+.dialogs .active{
+    color: maroon;
+}
+
+.dialog {
+
+}
+
+.dialogsItems {
+padding: 10px;
+    grid-area: a;
+}
+
+.messages {
+    padding: 10px;
+    grid-area: b;
+
+}
+
+.message {
 
 }
