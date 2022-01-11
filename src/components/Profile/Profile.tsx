@@ -1,21 +1,12 @@
 import React from 'react';
-import imgPicture from "../../img/SunFlower.jpg";
-import s from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 
-
-const Profile:React.FC = () => {
+const Profile: React.FC = () => {
     return (
         <div>
-
-            <div>
-                <img className={s.sunflowerImg} src={imgPicture}/>
-            </div>
-
-            <div>
-                ava+description
-            </div>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     );
