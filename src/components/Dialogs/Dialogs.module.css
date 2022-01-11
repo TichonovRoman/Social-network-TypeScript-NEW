@@ -6,17 +6,31 @@
     "a b"
 }
 
-.dialogs .active{
-    color: maroon;
-}
+
 
 .dialog {
 
 }
 
 .dialogsItems {
-padding: 10px;
+    padding: 10px;
     grid-area: a;
+  }
+
+.dialog a {
+    color: chocolate;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.dialogs .active {
+    color: maroon;
+    font-size: 20px;
+
+}
+
+.dialogsItems a:hover, .dialogsItems a:active, .dialogsItems a:focus {
+    color: maroon;
 }
 
 .messages {
