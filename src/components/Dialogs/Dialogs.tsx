@@ -11,6 +11,17 @@ type MessagePropsType = {
     message: string,
 }
 
+type DialogDataType = {
+    id: string
+    name: string
+}
+type MessagesDataType = {
+    id: string
+    message: string
+}
+
+
+
 const DialogItem: React.FC<DialogsPropsType> = (props) => {
     return (
         <div className={s.dialog}>
@@ -25,22 +36,37 @@ const Message: React.FC<MessagePropsType> = (props) => {
 }
 
 
+let dialogsData: Array<DialogDataType> = [
+    {id: "1", name: "Dimych",},
+    {id: "2", name: "Andrey",},
+    {id: "3", name: "Sveta",},
+    {id: "4", name: "Viktor",},
+    {id: "5", name: "Valera",},
+]
+let messagesData: Array<MessagesDataType> = [
+    {id: "1", message: "Hi!",},
+    {id: "2", message: "How are you doing?",},
+    {id: "3", message: "What are you doing?",},
+  ]
+
 const Dialogs: React.FC = () => {
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
-                <div className={s.active}>
-                    <DialogItem name="Dimych" id="1"/>
-                </div>
-                <DialogItem name="Andrey" id="2"/>
-                <DialogItem name="Sveta" id="3"/>
-                <DialogItem name="Viktor" id="4"/>
-                <DialogItem name="Valera" id="5"/>
-            </div>
+        <div className={s.dialogsItems}>
+        <div className={s.active}>
+        <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
+        </div>
+            <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
+            <DialogItem name={dialogsData[2].name} id={dialogsData[2].id}/>
+            <DialogItem name={dialogsData[3].name} id={dialogsData[3].id}/>
+
+        </div>
+
             <div className={s.messages}>
-                <Message message="Hi!"/>
-                <Message message="How are you doing?"/>
-                <Message message="What are you doing?"/>
+                <Message message={messagesData[0].message}/>
+                <Message message={messagesData[1].message}/>
+                <Message message={messagesData[2].message}/>
+
             </div>
         </div>
     );
