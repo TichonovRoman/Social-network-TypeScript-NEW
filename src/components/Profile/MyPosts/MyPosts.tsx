@@ -10,12 +10,16 @@ type PostsDataType = {
     likesCount: number
 }
 
-let postsData: Array<PostsDataType> = [
+let posts: Array<PostsDataType> = [
     {id: 1, message: "Hi, how are yuo?", likesCount: 15},
     {id: 2, message: "It`s my first post", likesCount: 20},
+    {id: 3, message: "Hi", likesCount: 56},
+    {id: 4, message: "Cool", likesCount: 2},
 ]
 
-let {id, message} = postsData[0] //декструрирующее присваивание
+let postsElements = posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+
+// let {id, message} = postsData[0] //декструрирующее присваивание
 
 
 const MyPosts: React.FC = () => {
@@ -31,8 +35,7 @@ const MyPosts: React.FC = () => {
                 </div>
             </div>
             <div className={s.posts}>
-                <Post message={message} likesCount={id}/>
-                <Post message={postsData[1].message} likesCount={postsData[1].likesCount}/>
+                {postsElements}
             </div>
         </div>
     )
