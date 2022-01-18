@@ -1,12 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import s from "./Navbar.module.css"
+import {FriendType} from "../../redux/state";
 
-const Navbar:React.FC = () => {
+type NavbarType = {
+    friends: Array<FriendType>
+}
+
+
+const Navbar: React.FC<NavbarType> = (props) => {
+
+    let friendsList = props.friends.map(m => <div className={s.friends}><img src={m.avatar}/>{m.name}</div>)
+
     return (
         <nav className={s.nav}>
             <div className={s.item}>
-                <NavLink to="/profile" >Profile</NavLink>
+                <NavLink to="/profile">Profile</NavLink>
             </div>
             <div className={s.item}>
                 <NavLink to="/dialogs">Messages</NavLink>
@@ -21,6 +30,17 @@ const Navbar:React.FC = () => {
             <div className={s.item}>
                 <NavLink to="/settings">Settings</NavLink>
             </div>
+
+            <div className={s.itemFriends}>
+                <NavLink to="/friends">Friends</NavLink>
+            </div>
+
+
+            <div className={s.friendsList}>
+                {friendsList}
+            </div>
+
+
         </nav>
     );
 };

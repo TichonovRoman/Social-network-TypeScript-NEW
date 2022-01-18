@@ -1,7 +1,7 @@
 
 .dialogs {
     display: grid;
-    grid-auto-columns: 2fr 10fr;
+    grid-auto-columns: 3fr 10fr;
     grid-template-areas:
     "a b"
 }
@@ -9,8 +9,9 @@
 
 
 .dialog {
+    display: grid;
 
-}
+   }
 
 .dialogsItems {
     padding: 10px;
@@ -40,6 +41,8 @@
 
 }
 
-.message {
-
+.img {
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
 }

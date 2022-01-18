@@ -2,7 +2,7 @@ import React from 'react';
 import imgPicture from "../../img/SunFlower.jpg";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostsDataType} from "../../../index";
+import {PostsDataType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>

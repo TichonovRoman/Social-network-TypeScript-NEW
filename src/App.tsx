@@ -9,16 +9,12 @@ import {Routes, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {DialogDataType, MessagesDataType, PostsDataType} from "./index";
+import {StateType} from "./redux/state";
 
 
 type AppPropsType = {
-    posts: Array<PostsDataType>
-    messages: Array<MessagesDataType>
-    dialogs: Array<DialogDataType>
+   state: StateType
 }
-
-
 
 
 const App: React.FC<AppPropsType> = (props) => {
@@ -26,11 +22,11 @@ const App: React.FC<AppPropsType> = (props) => {
     return (
         <div className='app-wrapper'>
             <Header/>
-            <Navbar/>
+            <Navbar friends = {props.state.friends}/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path={"/dialogs"} element={<Dialogs dialogs = {props.dialogs} messages={props.messages}/>}/>
-                    <Route path={"/profile"} element={<Profile posts = {props.posts}/>}/>
+                    <Route path={"/dialogs"} element={<Dialogs dialogs = {props.state.dialogsPage.dialogs} messages={props.state.dialogsPage.messages}/>}/>
+                    <Route path={"/profile"} element={<Profile posts = {props.state.profilePage.posts}/>}/>
                     <Route path={"/news"} element={<News/>}/>
                     <Route path={"/music"} element={<Music/>}/>
                     <Route path={"/settings"} element={<Settings/>}/>

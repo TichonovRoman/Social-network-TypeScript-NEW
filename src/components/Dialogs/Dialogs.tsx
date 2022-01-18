@@ -3,10 +3,7 @@ import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {DialogDataType, MessagesDataType} from "../../index";
-
-
-
+import {MessagesDataType, DialogDataType} from "../../redux/state";
 
 type DialogsPropsType = {
     messages: Array<MessagesDataType>
@@ -18,10 +15,11 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
+
                 <div className={s.active}>
-                    <DialogItem name={props.dialogs[0].name} id={props.dialogs[0].id}/>
+                    <DialogItem name={props.dialogs[0].name} id={props.dialogs[0].id} avatar={props.dialogs[0].avatar}/>
                 </div>
-                {props.dialogs.map(m => <DialogItem name={m.name} id={m.id}/>)}
+                {props.dialogs.map(m => <DialogItem name={m.name} id={m.id} avatar={m.avatar}/>)}
             </div>
 
             <div className={s.messages}>
