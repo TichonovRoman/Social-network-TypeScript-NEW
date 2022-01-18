@@ -12,6 +12,9 @@ type DialogsPropsType = {
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
+    let dialogsElements = props.dialogs.map(m => <DialogItem name={m.name} id={m.id} avatar={m.avatar}/>)
+    let messagesElements = props.messages.map(m => <Message message={m.message}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -19,11 +22,11 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <div className={s.active}>
                     <DialogItem name={props.dialogs[0].name} id={props.dialogs[0].id} avatar={props.dialogs[0].avatar}/>
                 </div>
-                {props.dialogs.map(m => <DialogItem name={m.name} id={m.id} avatar={m.avatar}/>)}
+                {dialogsElements}
             </div>
 
             <div className={s.messages}>
-                {props.messages.map(m => <Message message={m.message}/>)}
+                {messagesElements}
             </div>
         </div>
     );
