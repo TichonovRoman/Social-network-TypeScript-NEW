@@ -3,6 +3,8 @@ import imgPicture from "../../../img/SunFlower.jpg";
 import s from "./ProfileInfo.module.css"
 
 
+
+
 const ProfileInfo: React.FC = () => {
     return (
         <div>

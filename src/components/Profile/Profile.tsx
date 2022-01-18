@@ -1,13 +1,18 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {PostsDataType} from "../../index";
 
+type ProfilePropsType = {
+    posts: Array<PostsDataType>
+}
 
-const Profile: React.FC = () => {
+const Profile: React.FC<ProfilePropsType> = (props) => {
+
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts = {props.posts}/>
         </div>
     );
 };

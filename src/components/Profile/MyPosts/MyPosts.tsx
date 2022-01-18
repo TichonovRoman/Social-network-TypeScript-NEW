@@ -2,27 +2,16 @@ import React from 'react';
 import imgPicture from "../../img/SunFlower.jpg";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
+import {PostsDataType} from "../../../index";
 
-
-type PostsDataType = {
-    id: number
-    message: string
-    likesCount: number
+type MyPostsPropsType = {
+    posts: Array<PostsDataType>
 }
 
-let posts: Array<PostsDataType> = [
-    {id: 1, message: "Hi, how are yuo?", likesCount: 15},
-    {id: 2, message: "It`s my first post", likesCount: 20},
-    {id: 3, message: "Hi", likesCount: 56},
-    {id: 4, message: "Cool", likesCount: 2},
-]
+const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-let postsElements = posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements =  props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-// let {id, message} = postsData[0] //декструрирующее присваивание
-
-
-const MyPosts: React.FC = () => {
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
@@ -34,9 +23,7 @@ const MyPosts: React.FC = () => {
                     <button>Add post</button>
                 </div>
             </div>
-            <div className={s.posts}>
-                {postsElements}
-            </div>
+            <div className={s.posts}>{ postsElements }</div>
         </div>
     )
         ;
