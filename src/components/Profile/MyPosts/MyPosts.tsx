@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component, LegacyRef, MutableRefObject, useRef} from 'react';
 import imgPicture from "../../img/SunFlower.jpg";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
@@ -10,23 +10,33 @@ type MyPostsPropsType = {
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
-    let postsElements =  props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <div>
+    let newPostElement: any  = useRef()
+
+    let addPost = () => {
+
+            let text = newPostElement.current.value;
+            alert(text)
+
+    }
+
+        return (
+            <div className={s.postsBlock}>
+                <h3>My posts</h3>
                 <div>
-                    <textarea></textarea>
+                    <div>
+                        <textarea ref={newPostElement}></textarea>
+                    </div>
+                    <div>
+                        <button onClick={addPost}>Add post</button>
+                        {/*// вынести баттон в отдельный компонент и папку и передать нейм и колбэк//*/}
+                    </div>
                 </div>
-                <div>
-                    <button>Add post</button>
-                </div>
+                <div className={s.posts}>{postsElements}</div>
             </div>
-            <div className={s.posts}>{ postsElements }</div>
-        </div>
-    )
-        ;
-};
+        )
+            ;
+    };
 
-export default MyPosts;
+    export default MyPosts;
