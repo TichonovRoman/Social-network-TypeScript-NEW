@@ -6,6 +6,8 @@ import {PostsDataType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>
+    addPost: (postMessage:string) => void
+
 }
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -15,10 +17,8 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let newPostElement: any  = useRef()
 
     let addPost = () => {
-
             let text = newPostElement.current.value;
-            alert(text)
-
+            props.addPost(text)
     }
 
         return (
