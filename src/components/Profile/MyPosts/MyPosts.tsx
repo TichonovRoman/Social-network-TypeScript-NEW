@@ -6,7 +6,7 @@ import {PostsDataType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>
-    addPost: (postMessage:string) => void
+    addPost: (postMessage: string) => void
 
 }
 
@@ -14,29 +14,31 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
-    let newPostElement: any  = useRef()
+    let newPostElement: any = useRef()
 
     let addPost = () => {
-            let text = newPostElement.current.value;
-            props.addPost(text)
+        let text = newPostElement.current.value;
+        props.addPost(text);
+        newPostElement.current.value = ''
+
     }
 
-        return (
-            <div className={s.postsBlock}>
-                <h3>My posts</h3>
+    return (
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <div>
                 <div>
-                    <div>
-                        <textarea ref={newPostElement}></textarea>
-                    </div>
-                    <div>
-                        <button onClick={addPost}>Add post</button>
-                        {/*// вынести баттон в отдельный компонент и папку и передать нейм и колбэк//*/}
-                    </div>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
-                <div className={s.posts}>{postsElements}</div>
+                <div>
+                    <button onClick={addPost}>Add post</button>
+                    {/*// вынести баттон в отдельный компонент и папку и передать нейм и колбэк//*/}
+                </div>
             </div>
-        )
-            ;
-    };
+            <div className={s.posts}>{postsElements}</div>
+        </div>
+    )
+        ;
+};
 
-    export default MyPosts;
+export default MyPosts;
