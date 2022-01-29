@@ -3,11 +3,14 @@ import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {MessagesDataType, DialogDataType} from "../../redux/state";
+import {MessagesDataType, DialogDataType, updateNewMessageText, addMessage} from "../../redux/state";
 
 type DialogsPropsType = {
     messages: Array<MessagesDataType>
     dialogs: Array<DialogDataType>
+    updateNewMessageText: (text: string) => void
+    addMessage: () => void
+    newMessageText: string
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -16,12 +19,18 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElements = props.messages.map(m => <Message message={m.message}/>)
 
 
-    let newMessageElement: any  = useRef()
+    let newMessageElement: any = useRef()
 
     let addMessage = () => {
-        let text = newMessageElement.current.value;
-        alert(text)
+        props.addMessage()
     }
+
+
+    let onMessageChange = () => {
+        let text = newMessageElement.current.value
+        props.updateNewMessageText(text)
+    }
+
 
     return (
         <div className={s.dialogs}>
@@ -35,13 +44,16 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
             <div className={s.messages}>
                 {messagesElements}
-                <textarea ref={newMessageElement}></textarea>
+                <textarea ref={newMessageElement}
+                          onChange={onMessageChange}
+                          value={props.newMessageText}
+
+                />
                 <div>
                     <button onClick={addMessage}>Add message</button>
                 </div>
 
             </div>
-
 
 
         </div>

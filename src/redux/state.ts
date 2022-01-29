@@ -23,11 +23,13 @@ export type StateType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsDataType>,
+    newPostText: string
 
 }
 export type MessagesPageType = {
     messages: Array<MessagesDataType>,
     dialogs: Array<DialogDataType>,
+    newMessageText: string,
 }
 
 export type FriendType = {
@@ -44,6 +46,7 @@ let state: StateType = {
             {id: 3, message: "Hi", likesCount: 56},
             {id: 4, message: "Cool", likesCount: 20},
         ],
+        newPostText: 'it-kamasutra.com'
     },
     dialogsPage: {
         messages: [
@@ -58,6 +61,7 @@ let state: StateType = {
             { id: '4', name: `Sasha`, avatar: `https://yt3.ggpht.com/ytc/AAUvwng015d5KaGgzodaC6HmRLFwTZi8zmwZnt3onn4o=s900-c-k-c0x00ffffff-no-rj` },
             { id: '5', name: `Victor`, avatar: `https://placepic.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg` },
         ],
+        newMessageText: '',
     },
     friends: [
         { id: 1, name: `Dimych`, avatar: `https://vraki.net/sites/default/files/inline/images/30_55.jpg` },
@@ -68,17 +72,39 @@ let state: StateType = {
 }
 
 
+export let addPost = () => {
 
-export let addPost = (postMessage:string) => {
-
-    let newPost = {
-        id: 5,
-        message: postMessage,
+    const newPost: PostsDataType = {
+        id: new Date().getTime(),
+        message: state.profilePage.newPostText,
         likesCount: 0,
     }
 
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
+export let updateNewPostText = (newText:string) => {
+
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
+
+export let addMessage = () => {
+    const newMessage: MessagesDataType = {
+        id: "76",
+        message: state.dialogsPage.newMessageText,
+
+    }
+    state.dialogsPage.messages.push(newMessage)
+    state.dialogsPage.newMessageText = ''
+    rerenderEntireTree(state)
+}
+export let updateNewMessageText = (newText:string) => {
+    state.dialogsPage.newMessageText = newText
+    rerenderEntireTree(state)
+}
+
+
 
 export default state
