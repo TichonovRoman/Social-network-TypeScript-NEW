@@ -1,4 +1,9 @@
-import {rerenderEntireTree} from "../render";
+import React from "react";
+
+
+let rerenderEntireTree = () => {
+    console.log("State is changed")
+}
 
 
 export type DialogDataType = {
@@ -72,7 +77,7 @@ let state: StateType = {
 }
 
 
-export let addPost = () => {
+export const addPost = () => {
 
     const newPost: PostsDataType = {
         id: new Date().getTime(),
@@ -82,15 +87,15 @@ export let addPost = () => {
 
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
-export let updateNewPostText = (newText:string) => {
+export const updateNewPostText = (newText:string) => {
 
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
-export let addMessage = () => {
+export const addMessage = () => {
     const newMessage: MessagesDataType = {
         id: "76",
         message: state.dialogsPage.newMessageText,
@@ -98,13 +103,18 @@ export let addMessage = () => {
     }
     state.dialogsPage.messages.push(newMessage)
     state.dialogsPage.newMessageText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
-export let updateNewMessageText = (newText:string) => {
+export const updateNewMessageText = (newText:string) => {
     state.dialogsPage.newMessageText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
+
+
+export const subscribe = (observer: () => void) => {
+    rerenderEntireTree = observer
+}
 
 
 export default state
