@@ -1,11 +1,5 @@
 import React from "react";
 
-
-let rerenderEntireTree = () => {
-    console.log("State is changed")
-}
-
-
 export type DialogDataType = {
     id: string
     name: string
@@ -43,7 +37,21 @@ export type FriendType = {
     avatar: string
 }
 
-let state: StateType = {
+
+export type StoreType = {
+    _state: StateType,
+    _callSubscriber: () => void,
+    addPost: () => void,
+    updateNewPostText: (newText:string) => void,
+    addMessage: () => void,
+    updateNewMessageText: (newText:string) => void,
+    subscribe: (observer: () => void) => void
+    getState: () => StateType
+
+}
+
+let store: StoreType = {
+    _state: {
     profilePage: {
         posts: [
             {id: 1, message: "Hi, how are yuo?", likesCount: 15},
@@ -74,47 +82,47 @@ let state: StateType = {
         { id: 3, name: `Sveta`, avatar: `https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg` },
 
     ]
-}
+},
+    getState() {
+        return this._state
+    },
+    _callSubscriber () {
+        console.log("State is changed")
+    },
+    addPost () {
 
+        const newPost: PostsDataType = {
+            id: new Date().getTime(),
+            message: this._state.profilePage.newPostText,
+            likesCount: 0,
+        }
 
-export const addPost = () => {
+        this._state.profilePage.posts.push(newPost)
+        this._state.profilePage.newPostText = ''
+        this._callSubscriber()
+    },
+    updateNewPostText (newText:string) {
 
-    const newPost: PostsDataType = {
-        id: new Date().getTime(),
-        message: state.profilePage.newPostText,
-        likesCount: 0,
+        this._state.profilePage.newPostText = newText
+        this._callSubscriber()
+    },
+    addMessage () {
+        const newMessage: MessagesDataType = {
+            id: "76",
+            message: this._state.dialogsPage.newMessageText,
+
+        }
+        this._state.dialogsPage.messages.push(newMessage)
+        this._state.dialogsPage.newMessageText = ''
+        this._callSubscriber()
+    },
+    updateNewMessageText (newText:string) {
+        this._state.dialogsPage.newMessageText = newText
+        this._callSubscriber()
+    },
+    subscribe (observer) {
+        this._callSubscriber = observer
     }
-
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ''
-    rerenderEntireTree()
-}
-export const updateNewPostText = (newText:string) => {
-
-    state.profilePage.newPostText = newText
-    rerenderEntireTree()
 }
 
-export const addMessage = () => {
-    const newMessage: MessagesDataType = {
-        id: "76",
-        message: state.dialogsPage.newMessageText,
-
-    }
-    state.dialogsPage.messages.push(newMessage)
-    state.dialogsPage.newMessageText = ''
-    rerenderEntireTree()
-}
-export const updateNewMessageText = (newText:string) => {
-    state.dialogsPage.newMessageText = newText
-    rerenderEntireTree()
-}
-
-
-
-export const subscribe = (observer: () => void) => {
-    rerenderEntireTree = observer
-}
-
-
-export default state
+export default store
