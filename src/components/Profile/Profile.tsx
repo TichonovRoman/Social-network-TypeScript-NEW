@@ -19,8 +19,6 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
                      dispatch={props.dispatch}
 
                      newPostText={props.newPostText}
-
-
             />
 
         </div>

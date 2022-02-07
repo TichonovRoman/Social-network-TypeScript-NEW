@@ -39,71 +39,84 @@ export type FriendType = {
 export type StoreType = {
     _state: StateType,
     _callSubscriber: () => void,
-    // addPost: () => void,
-    // updateNewPostText: (newText:string) => void,
     dispatch: (action: ActionsTypes) => void,
     addMessage: () => void,
-    updateNewMessageText: (newText:string) => void,
+    updateNewMessageText: (newText: string) => void,
     subscribe: (observer: () => void) => void
     getState: () => StateType
 
 }
 
-type AddPostActionType = {
-    type: "ADD-POST"
-}
-type UpdateNewPostTextType = {
-    type: `UPDATE-NEW-POST-TEXT`,
-    newText: string
-}
+export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>;
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextType;
+const ADD_POST = `ADD-POST`
+const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
 
 let store: StoreType = {
     _state: {
-    profilePage: {
-        posts: [
-            {id: 1, message: "Hi, how are yuo?", likesCount: 15},
-            {id: 2, message: "It`s my first post", likesCount: 20},
-            {id: 3, message: "Hi", likesCount: 56},
-            {id: 4, message: "Cool", likesCount: 20},
-        ],
-        newPostText: 'it-kamasutra.com'
-    },
-    dialogsPage: {
-        messages: [
-            {id: '1', message: "Hi!",},
-            {id: '2', message: "How are you doing?",},
-            {id: '3', message: "What are you doing?",},
-        ],
-        dialogs: [
-            { id: '1', name: `Dimych`, avatar: `https://vraki.net/sites/default/files/inline/images/30_55.jpg` },
-            { id: '2', name: `Andrey`, avatar: `https://placepic.ru/wp-content/uploads/2018/01/art-krasivyie-kartinki-Putin-politika-1331294.jpeg` },
-            { id: '3', name: `Sveta`, avatar: `https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg` },
-            { id: '4', name: `Sasha`, avatar: `https://yt3.ggpht.com/ytc/AAUvwng015d5KaGgzodaC6HmRLFwTZi8zmwZnt3onn4o=s900-c-k-c0x00ffffff-no-rj` },
-            { id: '5', name: `Victor`, avatar: `https://placepic.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg` },
-        ],
-        newMessageText: '',
-    },
-    friends: [
-        { id: 1, name: `Dimych`, avatar: `https://vraki.net/sites/default/files/inline/images/30_55.jpg` },
-        { id: 2, name: `Andrey`, avatar: `https://placepic.ru/wp-content/uploads/2018/01/art-krasivyie-kartinki-Putin-politika-1331294.jpeg` },
-        { id: 3, name: `Sveta`, avatar: `https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg` },
+        profilePage: {
+            posts: [
+                {id: 1, message: "Hi, how are yuo?", likesCount: 15},
+                {id: 2, message: "It`s my first post", likesCount: 20},
+                {id: 3, message: "Hi", likesCount: 56},
+                {id: 4, message: "Cool", likesCount: 20},
+            ],
+            newPostText: 'it-kamasutra.com'
+        },
+        dialogsPage: {
+            messages: [
+                {id: '1', message: "Hi!",},
+                {id: '2', message: "How are you doing?",},
+                {id: '3', message: "What are you doing?",},
+            ],
+            dialogs: [
+                {id: '1', name: `Dimych`, avatar: `https://vraki.net/sites/default/files/inline/images/30_55.jpg`},
+                {
+                    id: '2',
+                    name: `Andrey`,
+                    avatar: `https://placepic.ru/wp-content/uploads/2018/01/art-krasivyie-kartinki-Putin-politika-1331294.jpeg`
+                },
+                {
+                    id: '3',
+                    name: `Sveta`,
+                    avatar: `https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg`
+                },
+                {
+                    id: '4',
+                    name: `Sasha`,
+                    avatar: `https://yt3.ggpht.com/ytc/AAUvwng015d5KaGgzodaC6HmRLFwTZi8zmwZnt3onn4o=s900-c-k-c0x00ffffff-no-rj`
+                },
+                {
+                    id: '5',
+                    name: `Victor`,
+                    avatar: `https://placepic.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg`
+                },
+            ],
+            newMessageText: '',
+        },
+        friends: [
+            {id: 1, name: `Dimych`, avatar: `https://vraki.net/sites/default/files/inline/images/30_55.jpg`},
+            {
+                id: 2,
+                name: `Andrey`,
+                avatar: `https://placepic.ru/wp-content/uploads/2018/01/art-krasivyie-kartinki-Putin-politika-1331294.jpeg`
+            },
+            {id: 3, name: `Sveta`, avatar: `https://pixelbox.ru/wp-content/uploads/2021/02/mult-ava-instagram-58.jpg`},
 
-    ]
-},
-    _callSubscriber () {
+        ]
+    },
+    _callSubscriber() {
         console.log("State is changed")
     },
 
     getState() {
         return this._state
     },
-    subscribe (observer) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
 
-    addMessage () {
+    addMessage() {
         const newMessage: MessagesDataType = {
             id: "76",
             message: this._state.dialogsPage.newMessageText,
@@ -113,13 +126,13 @@ let store: StoreType = {
         this._state.dialogsPage.newMessageText = ''
         this._callSubscriber()
     },
-    updateNewMessageText (newText:string) {
+    updateNewMessageText(newText: string) {
         this._state.dialogsPage.newMessageText = newText
         this._callSubscriber()
     },
 
-    dispatch (action) {
-        if (action.type === `ADD-POST`) {
+    dispatch(action) {
+        if (action.type === ADD_POST) {
             const newPost: PostsDataType = {
                 id: new Date().getTime(),
                 message: this._state.profilePage.newPostText,
@@ -129,7 +142,7 @@ let store: StoreType = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber()
-        } else if (action.type === `UPDATE-NEW-POST-TEXT`) {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber()
         }
@@ -137,5 +150,13 @@ let store: StoreType = {
     }
 
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST}) as const
+
+export const updateNewPostTextActionCreator = (text: string) => ({
+        type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }) as const
+
 
 export default store
