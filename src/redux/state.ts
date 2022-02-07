@@ -36,19 +36,28 @@ export type FriendType = {
     name: string,
     avatar: string
 }
-
-
 export type StoreType = {
     _state: StateType,
     _callSubscriber: () => void,
-    addPost: () => void,
-    updateNewPostText: (newText:string) => void,
+    // addPost: () => void,
+    // updateNewPostText: (newText:string) => void,
+    dispatch: (action: ActionsTypes) => void,
     addMessage: () => void,
     updateNewMessageText: (newText:string) => void,
     subscribe: (observer: () => void) => void
     getState: () => StateType
 
 }
+
+type AddPostActionType = {
+    type: "ADD-POST"
+}
+type UpdateNewPostTextType = {
+    type: `UPDATE-NEW-POST-TEXT`,
+    newText: string
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextType;
 
 let store: StoreType = {
     _state: {
@@ -83,29 +92,17 @@ let store: StoreType = {
 
     ]
 },
-    getState() {
-        return this._state
-    },
     _callSubscriber () {
         console.log("State is changed")
     },
-    addPost () {
 
-        const newPost: PostsDataType = {
-            id: new Date().getTime(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        }
-
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber()
+    getState() {
+        return this._state
     },
-    updateNewPostText (newText:string) {
-
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
+    subscribe (observer) {
+        this._callSubscriber = observer
     },
+
     addMessage () {
         const newMessage: MessagesDataType = {
             id: "76",
@@ -120,9 +117,25 @@ let store: StoreType = {
         this._state.dialogsPage.newMessageText = newText
         this._callSubscriber()
     },
-    subscribe (observer) {
-        this._callSubscriber = observer
+
+    dispatch (action) {
+        if (action.type === `ADD-POST`) {
+            const newPost: PostsDataType = {
+                id: new Date().getTime(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            }
+
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber()
+        } else if (action.type === `UPDATE-NEW-POST-TEXT`) {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        }
+
     }
+
 }
 
 export default store

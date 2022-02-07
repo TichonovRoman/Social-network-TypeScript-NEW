@@ -2,13 +2,12 @@ import React, {Component, LegacyRef, MutableRefObject, useRef} from 'react';
 import imgPicture from "../../img/SunFlower.jpg";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {PostsDataType} from "../../../redux/state";
+import {ActionsTypes, PostsDataType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>
-    addPost: () => void
+    dispatch: (action: ActionsTypes) => void
     newPostText: string
-    updateNewPostText: (text: string) => void
 
 }
 
@@ -19,12 +18,12 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let newPostElement: any = React.createRef<HTMLTextAreaElement>()
 
     let addPost = () => {
-        props.addPost();
-     }
+        props.dispatch({type: `ADD-POST`});
+    }
 
     let onPostChange = () => {
         let text = newPostElement.current?.value;
-        props.updateNewPostText(text)
+        props.dispatch({type: `UPDATE-NEW-POST-TEXT`, newText: text})
     }
 
     return (
