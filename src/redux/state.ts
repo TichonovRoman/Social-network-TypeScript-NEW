@@ -47,10 +47,15 @@ export type StoreType = {
 
 }
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator>;
+export type ActionsTypes = ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof updateNewMessageTextActionCreator>;
 
 const ADD_POST = `ADD-POST`
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
+const ADD_MESSAGE = `ADD-MESSAGE`
+const UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`
 
 let store: StoreType = {
     _state: {
@@ -147,7 +152,22 @@ let store: StoreType = {
             this._callSubscriber()
         }
 
-    }
+        if (action.type === ADD_MESSAGE) {
+            const newMessage: MessagesDataType = {
+                id: "3433",
+                message: this._state.dialogsPage.newMessageText,
+
+            }
+
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText = ''
+            this._callSubscriber()
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.newText
+            this._callSubscriber()
+        }
+
+            }
 
 }
 
@@ -155,6 +175,13 @@ export const addPostActionCreator = () => ({type: ADD_POST}) as const
 
 export const updateNewPostTextActionCreator = (text: string) => ({
         type: UPDATE_NEW_POST_TEXT,
+        newText: text
+    }) as const
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE}) as const
+
+export const updateNewMessageTextActionCreator = (text: string) => ({
+        type: UPDATE_NEW_MESSAGE_TEXT,
         newText: text
     }) as const
 

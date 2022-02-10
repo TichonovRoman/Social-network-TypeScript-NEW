@@ -31,8 +31,12 @@ const App: React.FC<AppPropsType> = (props) => {
                 <Routes>
                     <Route path={"/dialogs"} element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                messages={props.state.dialogsPage.messages}
-                                                               updateNewMessageText = {props.updateNewMessageText}
-                                                               addMessage = {props.addMessage}
+
+                                                               // updateNewMessageText = {props.updateNewMessageText}
+                                                               // addMessage = {props.addMessage}
+
+                                                               dispatch = {props.dispatch}
+
                                                                newMessageText = {props.state.dialogsPage.newMessageText}
 
                     />}/>

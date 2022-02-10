@@ -1,16 +1,23 @@
-import React, {useRef} from 'react';
+import React, {MutableRefObject, useRef} from 'react';
 import s from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {MessagesDataType, DialogDataType} from "../../redux/state";
+import {
+    MessagesDataType,
+    DialogDataType,
+    ActionsTypes,
+    updateNewPostTextActionCreator,
+    updateNewMessageTextActionCreator, addMessageActionCreator
+} from "../../redux/state";
 
 type DialogsPropsType = {
     messages: Array<MessagesDataType>
     dialogs: Array<DialogDataType>
-    updateNewMessageText: (text: string) => void
-    addMessage: () => void
+    // updateNewMessageText: (text: string) => void
+    // addMessage: () => void
     newMessageText: string
+    dispatch: (action: ActionsTypes) => void
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -19,17 +26,19 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
     let messagesElements = props.messages.map(m => <Message message={m.message}/>)
 
 
-    let newMessageElement: any = useRef()
+    let newMessageElement: any  = useRef()
 
     let addMessage = () => {
-        props.addMessage()
+        let action = addMessageActionCreator()
+        props.dispatch(action)
     }
 
 
     let onMessageChange = () => {
         let text = newMessageElement.current.value
-        props.updateNewMessageText(text)
-    }
+        let action = updateNewMessageTextActionCreator(text)
+        props.dispatch(action)
+       }
 
 
     return (
@@ -47,6 +56,7 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
                 <textarea ref={newMessageElement}
                           onChange={onMessageChange}
                           value={props.newMessageText}
+                          placeholder={"Enter your message"}
 
                 />
                 <div>
