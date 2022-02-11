@@ -16,8 +16,7 @@ type AppPropsType = {
     state: StateType
     dispatch: (action: ActionsTypes) => void
 
-    addMessage: () => void
-    updateNewMessageText: (text:string) => void
+
 }
 
 
@@ -32,20 +31,16 @@ const App: React.FC<AppPropsType> = (props) => {
                     <Route path={"/dialogs"} element={<Dialogs dialogs={props.state.dialogsPage.dialogs}
                                                                messages={props.state.dialogsPage.messages}
 
-                                                               // updateNewMessageText = {props.updateNewMessageText}
-                                                               // addMessage = {props.addMessage}
+                                                               dispatch={props.dispatch}
 
-                                                               dispatch = {props.dispatch}
-
-                                                               newMessageText = {props.state.dialogsPage.newMessageText}
+                                                               newMessageText={props.state.dialogsPage.newMessageText}
 
                     />}/>
                     <Route path={"/profile"} element={<Profile posts={props.state.profilePage.posts}
 
-                                                               dispatch = {props.dispatch}
+                                                               dispatch={props.dispatch}
 
-                                                               newPostText = {props.state.profilePage.newPostText}
-
+                                                               newPostText={props.state.profilePage.newPostText}
 
 
                     />}/>

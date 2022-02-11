@@ -7,9 +7,8 @@ import {
     MessagesDataType,
     DialogDataType,
     ActionsTypes,
-    updateNewPostTextActionCreator,
-    updateNewMessageTextActionCreator, addMessageActionCreator
-} from "../../redux/state";
+   } from "../../redux/state";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
     messages: Array<MessagesDataType>

@@ -8,8 +8,6 @@ test('renders learn react link', () => {
     render(<App state={store.getState()}
                 dispatch={store.dispatch}
 
-                updateNewMessageText={store.updateNewMessageText}
-                addMessage={store.addMessage}
 
     />);
     const linkElement = screen.getByText(/learn react/i);

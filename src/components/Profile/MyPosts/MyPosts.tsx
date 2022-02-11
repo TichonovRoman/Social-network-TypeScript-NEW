@@ -2,7 +2,8 @@ import React, {Component, LegacyRef, MutableRefObject, useRef} from 'react';
 import imgPicture from "../../img/SunFlower.jpg";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {ActionsTypes, addPostActionCreator, PostsDataType, updateNewPostTextActionCreator} from "../../../redux/state";
+import {ActionsTypes, PostsDataType} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>
