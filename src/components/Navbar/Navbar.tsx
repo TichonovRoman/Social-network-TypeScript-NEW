@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from "./Navbar.module.css"
-import {FriendType} from "../../redux/state";
+import {FriendType} from "../../redux/store";
 
 type NavbarType = {
     friends: Array<FriendType>
@@ -10,7 +10,7 @@ type NavbarType = {
 
 const Navbar: React.FC<NavbarType> = (props) => {
 
-    let friendsList = props.friends.map(m => <div className={s.friends}><img src={m.avatar}/>{m.name}</div>)
+    let friendsList = props.friends.map(m => <div key={m.id} className={s.friends}><img src={m.avatar}/>{m.name}</div>)
 
     return (
         <nav className={s.nav}>

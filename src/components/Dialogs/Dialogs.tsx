@@ -7,7 +7,7 @@ import {
     MessagesDataType,
     DialogDataType,
     ActionsTypes,
-   } from "../../redux/state";
+   } from "../../redux/store";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
@@ -21,8 +21,8 @@ type DialogsPropsType = {
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
-    let dialogsElements = props.dialogs.map(m => <DialogItem name={m.name} id={m.id} avatar={m.avatar}/>)
-    let messagesElements = props.messages.map(m => <Message message={m.message}/>)
+    let dialogsElements = props.dialogs.map(m => <DialogItem key={m.id} name={m.name} id={m.id} avatar={m.avatar}/>)
+    let messagesElements = props.messages.map(m => <Message key={m.id} message={m.message}/>)
 
 
     let newMessageElement: any  = useRef()
