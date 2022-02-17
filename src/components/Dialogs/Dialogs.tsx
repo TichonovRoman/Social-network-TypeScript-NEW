@@ -16,31 +16,15 @@ type DialogsPropsType = {
     // updateNewMessageText: (text: string) => void
     // addMessage: () => void
     newMessageText: string
-    dispatch: (action: ActionsTypes) => void
+    onMessageChange: (newMessageElement: any) => void
+    addMessage: () => void
 }
 
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
-
     let dialogsElements = props.dialogs.map(m => <DialogItem key={m.id} name={m.name} id={m.id} avatar={m.avatar}/>)
     let messagesElements = props.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-
-    let newMessageElement: any  = useRef()
-
-    let addMessage = () => {
-        let action = addMessageActionCreator()
-        props.dispatch(action)
-    }
-
-
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value
-        let action = updateNewMessageTextActionCreator(text)
-        props.dispatch(action)
-       }
-
-
-    return (
+      return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
 
@@ -52,14 +36,14 @@ const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
             <div className={s.messages}>
                 {messagesElements}
-                <textarea ref={newMessageElement}
-                          onChange={onMessageChange}
+                <textarea
+                          onChange={props.onMessageChange}
                           value={props.newMessageText}
                           placeholder={"Enter your message"}
 
                 />
                 <div>
-                    <button onClick={addMessage}>Add message</button>
+                    <button onClick={props.addMessage}>Add message</button>
                 </div>
 
             </div>

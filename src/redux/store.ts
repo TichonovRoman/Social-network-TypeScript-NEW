@@ -128,10 +128,4 @@ let store: StoreType = {
 
 
 }
-
-
-
-
-
-
 export default store

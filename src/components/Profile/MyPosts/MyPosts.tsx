@@ -7,41 +7,32 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../red
 
 type MyPostsPropsType = {
     posts: Array<PostsDataType>
-    dispatch: (action: ActionsTypes) => void
-    newPostText: string
+    // dispatch: (action: ActionsTypes) => void
+    // newPostText: string
+    onPostChange: (text: string) => void
+     newPostText: string
+    addPost: () => void
+
 
 }
-
-
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
-
     let newPostElement: any = React.createRef<HTMLTextAreaElement>()
-
-    let addPost = () => {
-        let action = addPostActionCreator()
-        props.dispatch(action);
-    }
-
-    let onPostChange = () => {
-        let text = newPostElement.current?.value;
-        let action = updateNewPostTextActionCreator(text)
-        props.dispatch(action)
-    }
+    let text = newPostElement.current?.value;
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onPostChange}
+                    <textarea onChange={()=>props.onPostChange(text)}
                               ref={newPostElement}
                               value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={props.addPost}>Add post</button>
                     {/*// вынести баттон в отдельный компонент и папку и передать нейм и колбэк//*/}
                 </div>
             </div>
