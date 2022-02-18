@@ -5,37 +5,53 @@ import Post from "./Post/Post";
 import {ActionsTypes, PostsDataType} from "../../../redux/store";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 import MyPosts from "./MyPosts";
+import {StoreContext} from '../../../StoreContext';
 
-type MyPostsPropsType = {
-    posts: Array<PostsDataType>
-    dispatch: (action: ActionsTypes) => void
-    newPostText: string
-
-}
-
-
-const MyPostsContainer: React.FC<MyPostsPropsType> = (props) => {
+// type MyPostsPropsType = {
+//     posts: Array<PostsDataType>
+//     dispatch: (action: ActionsTypes) => void
+//     newPostText: string
+//
+// }
 
 
-    let addPost = () => {
-        let action = addPostActionCreator()
-        props.dispatch(action);
-    }
+const MyPostsContainer: React.FC = (props) => {
 
-    let onPostChange = (text: any) => {
-        let action = updateNewPostTextActionCreator(text)
-        props.dispatch(action)
-    }
+
 
     return (
-        <MyPosts onPostChange={onPostChange}
-                 newPostText={props.newPostText}
-                 addPost={addPost}
-                 posts={props.posts}
+        <StoreContext.Consumer>
+            {(store) => {
+                let addPost = () => {
+                    let action = addPostActionCreator()
+                    store.dispatch(action);
+                }
 
-        />
+                let onPostChange = (text: any) => {
+                    let action = updateNewPostTextActionCreator(text)
+                    store.dispatch(action)
+                }
+
+                return (
+                    <MyPosts onPostChange={onPostChange}
+                             newPostText={store.getState().profilePage.newPostText}
+                             addPost={addPost}
+                             posts={store.getState().profilePage.posts}
+
+                    />
+                )
+
+
+            }
+
+
+        }
+
+
+        </StoreContext.Consumer>
+
     )
-        ;
+
 };
 
 export default MyPostsContainer;
