@@ -1,64 +1,53 @@
 import React, {ChangeEvent, MutableRefObject, useRef} from 'react';
-import s from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import {StoreContext} from "../../StoreContext"
 import {
-    MessagesDataType,
-    DialogDataType,
-    ActionsTypes,
-   } from "../../redux/store";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
+    addMessageActionCreator,
+    MessagesPageType,
+    updateNewMessageTextActionCreator
+} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
+import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
 
-type DialogsPropsType = {
-    messages: Array<MessagesDataType>
-    dialogs: Array<DialogDataType>
-    // updateNewMessageText: (text: string) => void
-    // addMessage: () => void
-    newMessageText: string
-    dispatch: (action: ActionsTypes) => void
+// type DialogsPropsType = {
+//     messages: Array<MessagesDataType>
+//     dialogs: Array<DialogDataType>
+//     // updateNewMessageText: (text: string) => void
+//     // addMessage: () => void
+//     newMessageText: string
+//     dispatch: (action: ActionsTypes) => void
+// }
+
+type MapStatePropsType = {
+    dialogsPage: MessagesPageType
 }
 
-const DialogsContainer: React.FC = (props) => {
+type MapDispatchToPropsType = {
+    onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    addMessage: () => void
+}
+
+export type DialogsPropsType = MapStatePropsType & MapDispatchToPropsType
+
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
+}
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
+            let text = e.currentTarget.value
+            let action = updateNewMessageTextActionCreator(text)
+            dispatch(action)
+        },
+        addMessage: () => dispatch(addMessageActionCreator())
+
+    }
+}
 
 
-
-
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-
-                let addMessage = () => {
-                    let action = addMessageActionCreator()
-                    store.dispatch(action)
-                }
-
-
-                let onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                    let text = e.currentTarget.value
-                    let action = updateNewMessageTextActionCreator(text)
-                    store.dispatch(action)
-                }
-
-                return (
-                    <Dialogs messages={store.getState().dialogsPage.messages}
-                             dialogs={store.getState().dialogsPage.dialogs}
-                             onMessageChange={onMessageChange}
-                             addMessage = {addMessage}
-                             newMessageText = {store.getState().dialogsPage.newMessageText}
-
-
-                    />
-                )
-            }
-        }
-
-        </StoreContext.Consumer>
-
-    );
-};
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
 
 export default DialogsContainer;

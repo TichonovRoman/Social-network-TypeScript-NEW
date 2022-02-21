@@ -1,45 +1,29 @@
 import React from "react";
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
+import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {
+    addMessageActionCreator,
+    MessagesPageType,
+    updateNewMessageTextActionCreator
+} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
+import {FriendType} from "../components/Navbar/Navbar";
+import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
+import {ActionsTypes} from "./redux-store";
 
-export type DialogDataType = {
-    id: string
-    name: string
-    avatar: string
-}
-export type MessagesDataType = {
-    id: string
-    message: string
-}
-export type PostsDataType = {
-    id: number
-    message: string
-    likesCount: number
-}
+
+
+
 
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: MessagesPageType
     friends: Array<FriendType>
 }
-export type ProfilePageType = {
-    posts: Array<PostsDataType>,
-    newPostText: string
 
-}
-export type MessagesPageType = {
-    messages: Array<MessagesDataType>,
-    dialogs: Array<DialogDataType>,
-    newMessageText: string,
-}
 
-export type FriendType = {
-    id: number,
-    name: string,
-    avatar: string
-}
-export type StoreType = {
+
+
+type StoreType = {
     _state: StateType,
     _callSubscriber: () => void,
     dispatch: (action: ActionsTypes) => void,
@@ -48,10 +32,7 @@ export type StoreType = {
 
 }
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>;
+
 
 let store: StoreType = {
     _state: {
@@ -128,4 +109,3 @@ let store: StoreType = {
 
 
 }
-export default store

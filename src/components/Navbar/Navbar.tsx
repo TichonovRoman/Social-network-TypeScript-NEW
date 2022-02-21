@@ -1,8 +1,13 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from "./Navbar.module.css"
-import {FriendType} from "../../redux/store";
 
+
+export type FriendType = {
+    id: number,
+    name: string,
+    avatar: string
+}
 type NavbarType = {
     friends: Array<FriendType>
 }

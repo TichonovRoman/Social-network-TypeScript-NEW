@@ -1,4 +1,4 @@
-import {ActionsTypes} from "./store";
+import {ActionsTypes} from "./redux-store";
 
 
 type FriendsDataType = {
@@ -18,7 +18,7 @@ let initialState: Array<FriendsDataType> = [
 
 ]
 
-const friendsReducer = (state = initialState, action: ActionsTypes) => {
+const friendsReducer = (state = initialState, action: ActionsTypes): Array<FriendsDataType> => {
 
 
     return state

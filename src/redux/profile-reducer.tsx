@@ -1,7 +1,15 @@
-import {ActionsTypes, MessagesDataType, PostsDataType, ProfilePageType} from "./store";
+import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
+import {ActionsTypes} from "./redux-store";
 
 export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
+export type ProfilePageType = {
+    posts: Array<PostsDataType>,
+    newPostText: string
+
+}
+
+
 
 
 let initialState: ProfilePageType = {
@@ -14,7 +22,7 @@ let initialState: ProfilePageType = {
     newPostText: 'it-kamasutra.com'
 }
 
-const profileReducer = (state = initialState, action: ActionsTypes) => {
+const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostsDataType = {
