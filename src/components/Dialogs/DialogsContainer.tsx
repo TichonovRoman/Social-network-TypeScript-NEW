@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MutableRefObject, useRef} from 'react';
+import React, {ChangeEvent} from 'react';
 import {
     addMessageActionCreator,
     MessagesPageType,

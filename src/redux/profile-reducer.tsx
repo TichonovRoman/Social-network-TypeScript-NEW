@@ -30,9 +30,6 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
             }
             const newState = {...state, posts: [...state.posts, newPost], newPostText: ""}
             return newState;
-        // state.posts.push(newPost)
-        // state.newPostText = ''
-        // return state;
 
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.newText}
