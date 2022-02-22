@@ -1,17 +1,10 @@
 import React from "react";
-import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer, {
-    addMessageActionCreator,
-    MessagesPageType,
-    updateNewMessageTextActionCreator
-} from "./dialogs-reducer";
+import profileReducer, {ProfilePageType} from "./profile-reducer";
+import dialogsReducer, {MessagesPageType} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
 import {FriendType} from "../components/Navbar/Navbar";
-import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
+
 import {ActionsTypes} from "./redux-store";
-
-
-
 
 
 export type StateType = {
@@ -19,8 +12,6 @@ export type StateType = {
     dialogsPage: MessagesPageType
     friends: Array<FriendType>
 }
-
-
 
 
 type StoreType = {
@@ -31,7 +22,6 @@ type StoreType = {
     getState: () => StateType
 
 }
-
 
 
 let store: StoreType = {

@@ -1,4 +1,3 @@
-
 import {ActionsTypes} from "./redux-store";
 
 
@@ -61,15 +60,15 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
                 id: "3433",
                 message: state.newMessageText,
             }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state
+            const newState = {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+            return newState
         case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newText
-            return state;
-        default: return state
-    }
+            const newState2 = {...state, newMessageText: action.newText}
+            return newState2
 
+        default:
+            return state
+    }
 
 
 }
@@ -80,7 +79,6 @@ export const updateNewMessageTextActionCreator = (text: string) => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newText: text
 }) as const
-
 
 
 export default dialogsReducer
