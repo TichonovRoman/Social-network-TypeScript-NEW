@@ -25,7 +25,7 @@ let initialState = {
         {id: '1', message: "Hi!",},
         {id: '2', message: "How are you doing?",},
         {id: '3', message: "What are you doing?",},
-    ],
+    ] as Array<MessagesDataType>,
     dialogs: [
         {id: '1', name: `Dimych`, avatar: `https://vraki.net/sites/default/files/inline/images/30_55.jpg`},
         {
@@ -48,8 +48,8 @@ let initialState = {
             name: `Victor`,
             avatar: `https://placepic.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg`
         },
-    ],
-    newMessageText: '',
+    ] as Array<DialogDataType>,
+    newMessageText: '' as string,
 }
 
 export const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {

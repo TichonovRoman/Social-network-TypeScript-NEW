@@ -15,8 +15,8 @@ let initialState: ProfilePageType = {
         {id: 2, message: "It`s my first post", likesCount: 20},
         {id: 3, message: "Hi", likesCount: 56},
         {id: 4, message: "Cool", likesCount: 20},
-    ],
-    newPostText: 'it-kamasutra.com'
+    ] as Array<PostsDataType>,
+    newPostText: 'it-kamasutra.com' as string
 }
 
 const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
