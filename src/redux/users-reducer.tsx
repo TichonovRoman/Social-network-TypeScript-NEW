@@ -27,10 +27,10 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersPageType
 
     switch (action.type) {
         case FOLLOW:
-            return  {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
+            return  {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)}
 
         case UNFOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
         case SET_USERS:
             return {...state, users: [...state.users, ...action.users]}
 
