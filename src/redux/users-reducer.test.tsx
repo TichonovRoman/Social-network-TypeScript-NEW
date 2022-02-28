@@ -16,27 +16,34 @@ test("one user should by followed", () => {
         users: [
             {
                 id: userID1,
-                photo: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Dmitry",
+                name: "Dmitry",
                 status: "I am boss",
-                location: {city: "Minsk", country: "Belarus"}
-            },
+                  },
             {
                 id: userID2,
-                photo: "https://klopik.com/uploads/posts/2013-04/1364760767_animals-dressed-like-humans-8.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: true,
-                fullName: "Roman",
+                name: "Roman",
                 status: "Hi",
-                location: {city: "Kazan", country: "Russia"}
-            },
+                       },
             {
                 id: userID3,
-                photo: "https://avatarko.ru/img/kartinka/15/devushka_ochki_14873.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Alina",
+                name: "Alina",
                 status: "I am wave Roman",
-                location: {city: "Limassol", country: "Kipr"}},
+               },
         ]}
 
         initialState = usersReducer(initialState, followAC(userID1))
@@ -57,27 +64,35 @@ test("one user should by unfollowed", () => {
         users: [
             {
                 id: userID1,
-                photo: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Dmitry",
+                name: "Dmitry",
                 status: "I am boss",
-                location: {city: "Minsk", country: "Belarus"}
-            },
+                            },
             {
                 id: userID2,
-                photo: "https://klopik.com/uploads/posts/2013-04/1364760767_animals-dressed-like-humans-8.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: true,
-                fullName: "Roman",
+                name: "Roman",
                 status: "Hi",
-                location: {city: "Kazan", country: "Russia"}
+
             },
             {
                 id: userID3,
-                photo: "https://avatarko.ru/img/kartinka/15/devushka_ochki_14873.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Alina",
+                name: "Alina",
                 status: "I am wave Roman",
-                location: {city: "Limassol", country: "Kipr"}},
+               },
         ]}
 
     initialState = usersReducer(initialState, unfollowAC(userID2))
@@ -100,54 +115,70 @@ test("new users should by added", () => {
         users: [
             {
                 id: userID1,
-                photo: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Dmitry",
+                name: "Dmitry",
                 status: "I am boss",
-                location: {city: "Minsk", country: "Belarus"}
+
             },
             {
                 id: userID2,
-                photo: "https://klopik.com/uploads/posts/2013-04/1364760767_animals-dressed-like-humans-8.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: true,
-                fullName: "Roman",
+                name: "Roman",
                 status: "Hi",
-                location: {city: "Kazan", country: "Russia"}
+
             },
             {
                 id: userID3,
-                photo: "https://avatarko.ru/img/kartinka/15/devushka_ochki_14873.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Alina",
+                name: "Alina",
                 status: "I am wave Roman",
-                location: {city: "Limassol", country: "Kipr"}},
+                },
         ]}
 
     let newUsers: Array<UsersDataType> =
         [
             {
                 id: userID4,
-                photo: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Dmitry",
+                name: "Dmitry",
                 status: "I am boss",
-                location: {city: "Minsk", country: "Belarus"}
-            },
+               },
             {
                 id: userID5,
-                photo: "https://klopik.com/uploads/posts/2013-04/1364760767_animals-dressed-like-humans-8.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: true,
-                fullName: "Roman",
+                name: "Roman",
                 status: "Hi",
-                location: {city: "Kazan", country: "Russia"}
-            },
+                 },
             {
                 id: userID6,
-                photo: "https://avatarko.ru/img/kartinka/15/devushka_ochki_14873.jpg",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
                 followed: false,
-                fullName: "Alina",
+                name: "Alina",
                 status: "I am wave Roman",
-                location: {city: "Limassol", country: "Kipr"}},
+              },
         ]
 
 

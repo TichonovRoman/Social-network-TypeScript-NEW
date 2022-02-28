@@ -8,11 +8,14 @@ export const SET_USERS = `SET-USERS`
 
 export type UsersDataType = {
     id: string,
-    photo: string
+    photos: {
+        small: string,
+        large: string
+    }
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
-    location: { city: string, country: string }
+    // location: { city: string, country: string }
 }
 
 export type UsersPageType = {
