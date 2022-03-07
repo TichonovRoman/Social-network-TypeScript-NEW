@@ -1,10 +1,7 @@
 import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
 import {v1} from "uuid";
-import usersReducer, {followAC, setUsersAC, unfollowAC, UsersDataType} from "./users-reducer";
+import usersReducer, {followAC, setUsersAC, unfollowAC, UsersDataType, UsersPageType} from "./users-reducer";
 
-type UsersType = {
-    users: Array<UsersDataType>
-}
 
 test("one user should by followed", () => {
 
@@ -12,7 +9,7 @@ test("one user should by followed", () => {
     const userID2 = v1()
     const userID3 = v1()
 
-    let initialState: UsersType = {
+    let initialState: UsersPageType = {
         users: [
             {
                 id: userID1,
@@ -44,7 +41,12 @@ test("one user should by followed", () => {
                 name: "Alina",
                 status: "I am wave Roman",
                },
-        ]}
+        ],
+        pageSize: 5,
+        totalUsersCount: 0,
+        currentPage: 1,
+
+    }
 
         initialState = usersReducer(initialState, followAC(userID1))
 
@@ -60,7 +62,7 @@ test("one user should by unfollowed", () => {
     const userID2 = v1()
     const userID3 = v1()
 
-    let initialState: UsersType = {
+    let initialState: UsersPageType = {
         users: [
             {
                 id: userID1,
@@ -93,7 +95,12 @@ test("one user should by unfollowed", () => {
                 name: "Alina",
                 status: "I am wave Roman",
                },
-        ]}
+        ],
+        pageSize: 5,
+        totalUsersCount: 0,
+        currentPage: 1,
+
+    }
 
     initialState = usersReducer(initialState, unfollowAC(userID2))
 
@@ -111,7 +118,7 @@ test("new users should by added", () => {
     const userID5 = v1()
     const userID6 = v1()
 
-    let initialState: UsersType = {
+    let initialState: UsersPageType = {
         users: [
             {
                 id: userID1,
@@ -145,7 +152,13 @@ test("new users should by added", () => {
                 name: "Alina",
                 status: "I am wave Roman",
                 },
-        ]}
+        ],
+        pageSize: 5,
+        totalUsersCount: 0,
+        currentPage: 1,
+
+
+    }
 
     let newUsers: Array<UsersDataType> =
         [
