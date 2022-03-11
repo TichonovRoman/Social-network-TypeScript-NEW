@@ -57,13 +57,13 @@ class UsersContainer extends React.Component<UsersPropsType> {
     render() {
         return <>
             {this.props.isFetching ? <Preloader/> : null}
-            <Users totalUsersCount = {this.props.totalUsersCount}
-                   pageSize = {this.props.pageSize}
-                   onPageChanged = {this.onPageChanged}
-                   currentPage = {this.props.currentPage}
-                   users = {this.props.users}
-                   unfollow = {this.props.unfollow}
-                   follow = {this.props.follow}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   onPageChanged={this.onPageChanged}
+                   currentPage={this.props.currentPage}
+                   users={this.props.users}
+                   unfollow={this.props.unfollow}
+                   follow={this.props.follow}
                 // isFetching = {this.props.isFetching}
 
             />
@@ -72,7 +72,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
-let mapStateToProps = (state: AppStateType): mapStateToPropsType  => {
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -103,8 +103,7 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToProps => {
         toogleIsFetching: (isFetching) => {
             dispatch(toogleIsFetchingAC(isFetching))
         }
-}
-
+    }
 
 
 }
