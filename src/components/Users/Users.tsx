@@ -11,26 +11,28 @@ type UsersPropsType = {
     users: Array<UsersDataType>,
     unfollow: (userID: string) => void,
     follow: (userID: string) => void,
-   }
+}
 
 
 const Users = (props: UsersPropsType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount/props.pageSize);
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
         if (i == 20) break;//Слишком много страниц, поэтому ограничиваем в 20 шт
     }
     return <div>
+        <div style={{paddingBottom: "5px"}}>
+            {pages.map(c => {
+                return <button
+                    onClick={(e) => {
+                        props.onPageChanged(c)
+                    }}
+                    className={props.currentPage === c ? styles.selectedPage : ""}>{c}</button>
+            })}
+        </div>
 
-        {pages.map(c => {
-            return <button
-                onClick={(e) => {
-                    props.onPageChanged(c)
-                }}
-                className={props.currentPage === c ? styles.selectedPage : ""}>{c}</button>
-        })}
 
         {
             props.users.map(u => <div key={u.id}>

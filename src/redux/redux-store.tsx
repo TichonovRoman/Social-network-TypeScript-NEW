@@ -4,11 +4,11 @@ import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} fr
 import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
 import usersReducer, {
-    followAC,
-    setCurrentPageAC,
-    setTotalUsersCountAC,
-    setUsersAC, toogleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers, toogleIsFetching,
+    unfollow
 } from "./users-reducer";
 
 export const rootReducers = combineReducers({
@@ -26,12 +26,12 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
-    | ReturnType<typeof followAC>
-    | ReturnType<typeof unfollowAC>
-    | ReturnType<typeof setUsersAC>
-    | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>
-    | ReturnType<typeof toogleIsFetchingAC>;
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toogleIsFetching>;
 
 
 

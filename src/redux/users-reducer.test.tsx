@@ -1,10 +1,10 @@
 import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
 import {v1} from "uuid";
 import usersReducer, {
-    followAC,
-    setUsersAC,
-    toogleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setUsers,
+    toogleIsFetching,
+    unfollow,
     UsersDataType,
     UsersPageType
 } from "./users-reducer";
@@ -55,7 +55,7 @@ test("one user should by followed", () => {
 
     }
 
-        initialState = usersReducer(initialState, followAC(userID1))
+        initialState = usersReducer(initialState, follow(userID1))
 
         expect(initialState.users[0].followed).toBe(true)
         expect(initialState.users[1].followed).toBe(true)
@@ -109,7 +109,7 @@ test("one user should by unfollowed", () => {
 
     }
 
-    initialState = usersReducer(initialState, unfollowAC(userID2))
+    initialState = usersReducer(initialState, unfollow(userID2))
 
     expect(initialState.users[0].followed).toBe(false)
     expect(initialState.users[1].followed).toBe(false)
@@ -203,7 +203,7 @@ test("new users should by added", () => {
         ]
 
 
-    initialState = usersReducer(initialState, setUsersAC(newUsers))
+    initialState = usersReducer(initialState, setUsers(newUsers))
 
     expect(initialState.users.length).toBe(6)
     expect(initialState.users[0].id).toBe(userID1)
@@ -259,7 +259,7 @@ test("preloader should by changed", () => {
         currentPage: 1,
         isFetching: false,
     }
-    initialState = usersReducer(initialState, toogleIsFetchingAC(true))
+    initialState = usersReducer(initialState, toogleIsFetching(true))
     expect(initialState.isFetching).toBe(true)
 })
 
