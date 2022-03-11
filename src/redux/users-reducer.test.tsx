@@ -1,9 +1,13 @@
 import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
 import {v1} from "uuid";
-import usersReducer, {followAC, setUsersAC, unfollowAC, UsersDataType, UsersPageType} from "./users-reducer";
-
-
-
+import usersReducer, {
+    followAC,
+    setUsersAC,
+    toogleIsFetchingAC,
+    unfollowAC,
+    UsersDataType,
+    UsersPageType
+} from "./users-reducer";
 
 test("one user should by followed", () => {
 
@@ -58,7 +62,6 @@ test("one user should by followed", () => {
         expect(initialState.users[2].followed).toBe(false)
 
 })
-
 test("one user should by unfollowed", () => {
 
     const userID1 = v1()
@@ -211,6 +214,53 @@ test("new users should by added", () => {
     expect(initialState.users[5].id).toBe(userID6)
 
 
+})
+test("preloader should by changed", () => {
+
+
+
+    let initialState: UsersPageType = {
+        users: [
+            {
+                id: "userID1",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
+                followed: false,
+                name: "Dmitry",
+                status: "I am boss",
+
+            },
+            {
+                id: "userID2",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
+                followed: true,
+                name: "Roman",
+                status: "Hi",
+
+            },
+            {
+                id: "userID3",
+                photos:{
+                    small: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg",
+                    large: "https://pixelbox.ru/wp-content/uploads/2021/03/ava-instagram-49.jpg"
+                },
+                followed: false,
+                name: "Alina",
+                status: "I am wave Roman",
+                },
+        ],
+        pageSize: 5,
+        totalUsersCount: 0,
+        currentPage: 1,
+        isFetching: false,
+    }
+    initialState = usersReducer(initialState, toogleIsFetchingAC(true))
+    expect(initialState.isFetching).toBe(true)
 })
 
 
