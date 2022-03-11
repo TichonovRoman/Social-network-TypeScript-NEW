@@ -3,6 +3,8 @@ import {v1} from "uuid";
 import usersReducer, {followAC, setUsersAC, unfollowAC, UsersDataType, UsersPageType} from "./users-reducer";
 
 
+
+
 test("one user should by followed", () => {
 
     const userID1 = v1()
@@ -45,6 +47,7 @@ test("one user should by followed", () => {
         pageSize: 5,
         totalUsersCount: 0,
         currentPage: 1,
+        isFetching: false,
 
     }
 
@@ -99,6 +102,7 @@ test("one user should by unfollowed", () => {
         pageSize: 5,
         totalUsersCount: 0,
         currentPage: 1,
+        isFetching: false,
 
     }
 
@@ -156,6 +160,7 @@ test("new users should by added", () => {
         pageSize: 5,
         totalUsersCount: 0,
         currentPage: 1,
+        isFetching: false,
 
 
     }

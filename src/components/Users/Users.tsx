@@ -11,7 +11,7 @@ type UsersPropsType = {
     users: Array<UsersDataType>,
     unfollow: (userID: string) => void,
     follow: (userID: string) => void,
-}
+   }
 
 
 const Users = (props: UsersPropsType) => {

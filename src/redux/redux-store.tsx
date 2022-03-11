@@ -3,7 +3,13 @@ import {combineReducers, createStore} from "redux";
 import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
-import usersReducer, {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./users-reducer";
+import usersReducer, {
+    followAC,
+    setCurrentPageAC,
+    setTotalUsersCountAC,
+    setUsersAC, toogleIsFetchingAC,
+    unfollowAC
+} from "./users-reducer";
 
 export const rootReducers = combineReducers({
     profilePage: profileReducer,
@@ -24,7 +30,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setTotalUsersCountAC>;
+    | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toogleIsFetchingAC>;
 
 
 
