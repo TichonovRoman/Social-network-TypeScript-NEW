@@ -3,18 +3,18 @@ import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-// type ProfilePropsType = {
-//     posts: Array<PostsDataType>
-//     dispatch: (action: ActionsTypes) => void
-//     newPostText: string
-//
-// }
+type ProfilePropsType = {
+    profile: any
 
-const Profile: React.FC= (props) => {
+}
 
-    return (
+
+
+const Profile = (props: ProfilePropsType) => {
+
+     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile = {props.profile}/>
             <MyPostsContainer/>
 
         </div>

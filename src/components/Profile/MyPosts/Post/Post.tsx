@@ -9,7 +9,7 @@ type PostPropsType = {
 const Post: React.FC<PostPropsType> = (props) => {
     return (
         <div className={s.item}>
-            <img src='https://i001.fotocdn.net/s130/d16602d7ba16f827/user_xl/2932469603.jpg'/>
+            <img src='https://скачать-ватсап-бесплатно.рус/wp-content/uploads/2018/10/avatarka-dlya-devushek-vatsap-7.jpg'/>
             {props.message}
             <div>Like: {props.likesCount}</div>
         </div>

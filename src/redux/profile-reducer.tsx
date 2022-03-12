@@ -1,11 +1,14 @@
 import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
-
 export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
+export const SET_USER_PROFILE = `SET-USER-PROFILE`
+
+
 export type ProfilePageType = {
     posts: Array<PostsDataType>,
-    newPostText: string
+    newPostText: string,
+    profile: any,
 
 }
 
@@ -16,7 +19,9 @@ let initialState: ProfilePageType = {
         {id: 3, message: "Hi", likesCount: 56},
         {id: 4, message: "Cool", likesCount: 20},
     ] as Array<PostsDataType>,
-    newPostText: 'it-kamasutra.com' as string
+    newPostText: 'it-kamasutra.com' as string,
+    profile: null
+
 }
 
 const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
@@ -34,6 +39,11 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
         case UPDATE_NEW_POST_TEXT:
             return {...state, newPostText: action.newText}
 
+        case SET_USER_PROFILE:
+            return {...state, profile: action.profile}
+
+
+
         default:
             return state
     }
@@ -42,6 +52,7 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST}) as const
+export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile}) as const
 
 export const updateNewPostTextActionCreator = (text: string) => ({
     type: UPDATE_NEW_POST_TEXT,
