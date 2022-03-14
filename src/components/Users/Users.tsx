@@ -25,8 +25,8 @@ const Users = (props: UsersPropsType) => {
     }
     return <div>
         <div style={{paddingBottom: "5px"}}>
-            {pages.map(c => {
-                return <button
+            {pages.map((c, index) => {
+                return <button key={index}
                     onClick={(e) => {
                         props.onPageChanged(c)
                     }}

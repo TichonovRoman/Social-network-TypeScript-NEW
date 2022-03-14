@@ -1,9 +1,21 @@
 import React from 'react';
 import imgPicture from "../../../img/SunFlower.jpg";
 import s from "./ProfileInfo.module.css"
+import Preloader from "../../common/Preloader/Preloader";
 
-type ProfileInfoPropsType = {
-    profile: any
+export type ProfileInfoPropsType = {
+    profile: {
+        "aboutMe": string,
+        "contacts": {},
+        "lookingForAJob": boolean,
+        "lookingForAJobDescription": string,
+        "fullName": string,
+        "userId": number,
+        photos: {
+            small: string,
+            large: string,
+        }
+    }
 
 }
 
@@ -11,8 +23,11 @@ type ProfileInfoPropsType = {
 
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
+    if(!props.profile) { return <Preloader/>}
     return (
+
         <div>
+
             <div>
                 <img className={s.sunflowerImg} src={imgPicture}/>
             </div>

@@ -1,16 +1,12 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileInfo, {ProfileInfoPropsType} from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-type ProfilePropsType = {
-    profile: any
-
-}
 
 
 
-const Profile = (props: ProfilePropsType) => {
+const Profile = (props: ProfileInfoPropsType) => {
 
      return (
         <div>
