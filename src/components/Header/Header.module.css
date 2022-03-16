@@ -9,3 +9,13 @@
     height: 60px;
     background-color: chocolate;
 }
+
+.loginBlock {
+    float: right;
+
+}
+
+.loginBlock a {
+   color: white;
+
+}

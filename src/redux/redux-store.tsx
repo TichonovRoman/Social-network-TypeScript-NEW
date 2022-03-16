@@ -10,12 +10,14 @@ import usersReducer, {
     setUsers, toogleIsFetching,
     unfollow
 } from "./users-reducer";
+import authReducer, {setAuthUserData} from "./auth-reducer";
 
 export const rootReducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     friends: friendsReducer,
     usersPage: usersReducer,
+    auth: authReducer,
 })
 
 export type AppStateType = ReturnType<typeof rootReducers>
@@ -32,7 +34,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toogleIsFetching>
-    | ReturnType<typeof setUserProfile>;
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setAuthUserData>;
 
 
 

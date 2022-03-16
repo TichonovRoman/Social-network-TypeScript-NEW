@@ -11,6 +11,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {ReactReduxContext} from "react-redux";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 //
@@ -26,7 +27,7 @@ const App: React.FC = (props) => {
 
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <ReactReduxContext.Consumer>
                 {(store) => (
                     <Navbar friends={store.store.getState().friends}/>
@@ -44,6 +45,7 @@ const App: React.FC = (props) => {
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
+                    <Route path={"/login"} component={Settings}/>
                 </>
             </div>
             <Footer/>
