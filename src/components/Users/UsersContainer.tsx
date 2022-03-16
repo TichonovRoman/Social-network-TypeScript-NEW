@@ -43,6 +43,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
+            .catch(() => alert("Failed to get users"))
     }
 
     onPageChanged = (pageNumber: number) => {
@@ -52,10 +53,11 @@ class UsersContainer extends React.Component<UsersPropsType> {
             this.props.toogleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
+            .catch(() => alert("Failed to get users"))
     }
 
     render() {
-        return <>
+        return <div style={{position: "relative"}}>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
@@ -67,7 +69,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 // isFetching = {this.props.isFetching}
 
             />
-        </>
+        </div>
 
     }
 }
