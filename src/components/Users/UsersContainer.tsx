@@ -38,7 +38,10 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() { // при встраивании в дом мы говорим компоненте, что нужно сжделать запрос на сервер
         this.props.toogleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count =${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count =${this.props.pageSize}`,
+            {withCredentials: true}
+
+        ).then(response => {
             this.props.toogleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -49,7 +52,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toogleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count =${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0//users?page=${this.props.currentPage}&count =${this.props.pageSize}`,
+            {withCredentials: true}
+            ).then(response => {
             this.props.toogleIsFetching(false)
             this.props.setUsers(response.data.items)
         })
@@ -66,6 +71,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    users={this.props.users}
                    unfollow={this.props.unfollow}
                    follow={this.props.follow}
+                   toogleIsFetching = {this.props.toogleIsFetching}
                 // isFetching = {this.props.isFetching}
 
             />

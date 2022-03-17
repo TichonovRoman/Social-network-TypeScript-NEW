@@ -3,6 +3,7 @@ import NotFoundFoto from "../../img/FotoNotFound.jpg";
 import React from "react";
 import {UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 type UsersPropsType = {
     totalUsersCount: number,
@@ -12,6 +13,7 @@ type UsersPropsType = {
     users: Array<UsersDataType>,
     unfollow: (userID: string) => void,
     follow: (userID: string) => void,
+    toogleIsFetching: (value: boolean) => void,
 }
 
 
@@ -27,10 +29,10 @@ const Users = (props: UsersPropsType) => {
         <div style={{paddingBottom: "5px"}}>
             {pages.map((c, index) => {
                 return <button key={index}
-                    onClick={(e) => {
-                        props.onPageChanged(c)
-                    }}
-                    className={props.currentPage === c ? styles.selectedPage : ""}>{c}</button>
+                               onClick={(e) => {
+                                   props.onPageChanged(c)
+                               }}
+                               className={props.currentPage === c ? styles.selectedPage : ""}>{c}</button>
             })}
         </div>
 
@@ -52,11 +54,45 @@ const Users = (props: UsersPropsType) => {
 
                         {u.followed
                             ? <button onClick={() => {
-                                return (
-                                    props.unfollow(u.id)
-                                )
-                            }}>Unfollow</button>
-                            : <button onClick={() => props.follow(u.id)}>Follow</button>}
+                                props.toogleIsFetching(true)
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                                    {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "cdcf9189-0a6c-4ea6-a766-22c26d9d1d3e"
+                                        }
+
+                                    }
+                                ).then(response => {
+                                    props.toogleIsFetching(false)
+                                    if (response.data.resultCode == 0) {
+                                        props.unfollow(u.id)
+                                    }
+                                })
+                                    .catch(() => alert("Failed to unfollow users"))
+                            }
+
+
+                            }>Unfollow</button>
+                            : <button onClick={() => {
+                                props.toogleIsFetching(true)
+                                axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {},
+                                    {
+                                        withCredentials: true,
+                                        headers: {
+                                            "API-KEY": "cdcf9189-0a6c-4ea6-a766-22c26d9d1d3e"
+                                        }
+
+                                    }
+                                ).then(response => {
+                                    props.toogleIsFetching(false)
+                                    if (response.data.resultCode == 0) {
+                                        props.follow(u.id)
+                                    }
+                                })
+                                    .catch(() => alert("Failed to follow users"))
+
+                            }}>Follow</button>}
                     </div>
                 </span>
                 <span>
