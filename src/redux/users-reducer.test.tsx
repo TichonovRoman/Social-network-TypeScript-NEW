@@ -52,6 +52,7 @@ test("one user should by followed", () => {
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
+        followingInProgress: [],
 
     }
 
@@ -106,7 +107,7 @@ test("one user should by unfollowed", () => {
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
-
+        followingInProgress: [],
     }
 
     initialState = usersReducer(initialState, unfollow(userID2))
@@ -164,7 +165,7 @@ test("new users should by added", () => {
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
-
+        followingInProgress: [],
 
     }
 
@@ -258,6 +259,7 @@ test("preloader should by changed", () => {
         totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
+        followingInProgress: [],
     }
     initialState = usersReducer(initialState, toogleIsFetching(true))
     expect(initialState.isFetching).toBe(true)

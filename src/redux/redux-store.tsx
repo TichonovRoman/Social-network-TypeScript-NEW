@@ -7,7 +7,7 @@ import usersReducer, {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers, toogleIsFetching,
+    setUsers, toogleFollowingProgress, toogleIsFetching,
     unfollow
 } from "./users-reducer";
 import authReducer, {setAuthUserData} from "./auth-reducer";
@@ -35,7 +35,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toogleIsFetching>
     | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setAuthUserData>;
+    | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toogleFollowingProgress>;
 
 
 
