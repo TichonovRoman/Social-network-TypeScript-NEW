@@ -56,7 +56,7 @@ const Users = (props: UsersPropsType) => {
                         {u.followed
                             ? <button onClick={() => {
                                 props.toogleIsFetching(true)
-                                 usersAPI.unfollow(u.id).then(data => {
+                                usersAPI.unfollow(u.id).then(data => {
                                     props.toogleIsFetching(false)
                                     if (data.resultCode == 0) {
                                         props.unfollow(u.id)
@@ -69,17 +69,9 @@ const Users = (props: UsersPropsType) => {
                             }>Unfollow</button>
                             : <button onClick={() => {
                                 props.toogleIsFetching(true)
-                                axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`, {},
-                                    {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "cdcf9189-0a6c-4ea6-a766-22c26d9d1d3e"
-                                        }
-
-                                    }
-                                ).then(response => {
+                                usersAPI.follow(u.id).then(data => {
                                     props.toogleIsFetching(false)
-                                    if (response.data.resultCode == 0) {
+                                    if (data.resultCode == 0) {
                                         props.follow(u.id)
                                     }
                                 })
