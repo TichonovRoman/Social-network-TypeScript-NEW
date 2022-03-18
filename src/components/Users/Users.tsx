@@ -4,6 +4,7 @@ import React from "react";
 import {UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 type UsersPropsType = {
     totalUsersCount: number,
@@ -55,17 +56,9 @@ const Users = (props: UsersPropsType) => {
                         {u.followed
                             ? <button onClick={() => {
                                 props.toogleIsFetching(true)
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
-                                    {
-                                        withCredentials: true,
-                                        headers: {
-                                            "API-KEY": "cdcf9189-0a6c-4ea6-a766-22c26d9d1d3e"
-                                        }
-
-                                    }
-                                ).then(response => {
+                                 usersAPI.unfollow(u.id).then(data => {
                                     props.toogleIsFetching(false)
-                                    if (response.data.resultCode == 0) {
+                                    if (data.resultCode == 0) {
                                         props.unfollow(u.id)
                                     }
                                 })

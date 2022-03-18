@@ -1,10 +1,5 @@
 import axios from "axios";
 
-type GetUsersPropsType = {
-    currentPage: number,
-    pageSize: number,
-}
-
 
 const instance = axios.create({
         baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -20,7 +15,6 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count =${pageSize}`)
             .then((response) => response.data)
     },
+    unfollow(id: string) { return instance.delete(`follow/${id}`)
+        .then((response) => response.data)},
 }
-
-
-
