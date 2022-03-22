@@ -1,10 +1,10 @@
 import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
 import {v1} from "uuid";
 import usersReducer, {
-    follow,
+    followSuccess ,
     setUsers,
     toogleIsFetching,
-    unfollow,
+    unfollowSuccess ,
     UsersDataType,
     UsersPageType
 } from "./users-reducer";
@@ -56,7 +56,7 @@ test("one user should by followed", () => {
 
     }
 
-        initialState = usersReducer(initialState, follow(userID1))
+        initialState = usersReducer(initialState, followSuccess (userID1))
 
         expect(initialState.users[0].followed).toBe(true)
         expect(initialState.users[1].followed).toBe(true)
@@ -110,7 +110,7 @@ test("one user should by unfollowed", () => {
         followingInProgress: [],
     }
 
-    initialState = usersReducer(initialState, unfollow(userID2))
+    initialState = usersReducer(initialState, unfollowSuccess(userID2))
 
     expect(initialState.users[0].followed).toBe(false)
     expect(initialState.users[1].followed).toBe(false)

@@ -1,16 +1,18 @@
 import React from "react"
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
 import usersReducer, {
-    follow,
+    followSuccess ,
     setCurrentPage,
     setTotalUsersCount,
     setUsers, toogleFollowingProgress, toogleIsFetching,
-    unfollow
+    unfollowSuccess
 } from "./users-reducer";
 import authReducer, {setAuthUserData} from "./auth-reducer";
+
+import thunkMiddleware from "redux-thunk"
 
 export const rootReducers = combineReducers({
     profilePage: profileReducer,
@@ -22,14 +24,14 @@ export const rootReducers = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducers>
 
-let store = createStore(rootReducers)
+let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
 
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
-    | ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    | ReturnType<typeof followSuccess >
+    | ReturnType<typeof unfollowSuccess >
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>

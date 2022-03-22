@@ -1,7 +1,7 @@
 import styles from "./users.module.css";
 import NotFoundFoto from "../../img/FotoNotFound.jpg";
 import React from "react";
-import {toogleFollowingProgress, UsersDataType} from "../../redux/users-reducer";
+import {follow, toogleFollowingProgress, unfollow, UsersDataType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {usersAPI} from "../../api/api";
@@ -12,11 +12,11 @@ type UsersPropsType = {
     onPageChanged: (pageNumber: number) => void
     currentPage: number,
     users: Array<UsersDataType>,
-    unfollow: (userID: string) => void,
-    follow: (userID: string) => void,
-    toogleIsFetching: (value: boolean) => void,
-    toogleFollowingProgress: (followingInProgress: boolean, userId: string) => void,
+
+
     followingInProgress: string[],
+    follow: (userId: string) => void,
+    unfollow: (userId: string) => void
 }
 
 
@@ -56,38 +56,13 @@ const Users = (props: UsersPropsType) => {
                     <div>
 
                         {u.followed
-                            ? <button disabled={props.followingInProgress.some(id => u.id === id)} onClick={() => {
-                                props.toogleIsFetching(true)
-                                props.toogleFollowingProgress(true, u.id)
-                                usersAPI.unfollow(u.id).then(data => {
-
-
-                                    props.toogleIsFetching(false)
-                                    if (data.resultCode == 0) {
-                                        props.unfollow(u.id)
-                                    }
-                                    props.toogleFollowingProgress(false, u.id)
-                                })
-                                    .catch(() => alert("Failed to unfollow users"))
-                            }
-
-
+                            ? <button disabled={props.followingInProgress.some(id => u.id === id)}
+                                      onClick={() =>props.unfollow(u.id)
                             }>Unfollow</button>
-                            : <button disabled={props.followingInProgress.some(id => u.id === id)} onClick={() => {
-                                props.toogleIsFetching(true)
-                                props.toogleFollowingProgress(true, u.id)
-                                usersAPI.follow(u.id).then(data => {
-
-                                    props.toogleIsFetching(false)
-                                    if (data.resultCode == 0) {
-                                        props.follow(u.id)
-                                    }
-                                    props.toogleFollowingProgress(false, u.id)
-
-                                })
-                                    .catch(() => alert("Failed to follow users"))
-
-                            }}>Follow</button>}
+                            : <button disabled={props.followingInProgress.some(id => u.id === id)}
+                                      onClick={() => props.follow(u.id)
+                            }
+                            >Follow</button>}
                     </div>
                 </span>
                 <span>

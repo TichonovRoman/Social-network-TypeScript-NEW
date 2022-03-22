@@ -1,6 +1,8 @@
 import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
 import {v1} from "uuid";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export const FOLLOW = `FOLLOW`
 export const UNFOLLOW = `UNFOLLOW`
@@ -43,6 +45,7 @@ let initialState: UsersPageType = {
 const usersReducer = (state = initialState, action: ActionsTypes): UsersPageType => {
 
     switch (action.type) {
+
         case FOLLOW:
             return  {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)}
 
@@ -69,13 +72,63 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersPageType
 
 }
 
-export const follow = (userID: string) => ({type: FOLLOW, userID}) as const
-export const unfollow = (userID: string) => ({type: UNFOLLOW, userID}) as const
+export const followSuccess = (userID: string) => ({type: FOLLOW, userID}) as const
+export const unfollowSuccess  = (userID: string) => ({type: UNFOLLOW, userID}) as const
 export const setUsers = (users: any) => ({type: SET_USERS, payload: {users}}) as const
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, payload: {currentPage}}) as const
 export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, payload: {totalUsersCount}}) as const
 export const toogleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCHING, payload: {isFetching}}) as const
 export const toogleFollowingProgress = (isFetching : boolean, userId: string) => ({type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching, userId}) as const
+
+
+export const getUsers = (currentPage: number, pageSize: number)  => {
+    return (dispatch: Dispatch) => {
+    dispatch(toogleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toogleIsFetching(false))
+        dispatch(setUsers(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
+        .catch(() => alert("Failed to get users"))
+
+}}
+
+export const follow = (userId: string)  => {
+    return (dispatch: Dispatch) => {
+        dispatch(toogleIsFetching(true))
+        dispatch(toogleFollowingProgress(true, userId))
+        usersAPI.follow(userId).then(data => {
+
+            dispatch(toogleIsFetching(false))
+            if (data.resultCode == 0) {
+                dispatch(followSuccess (userId))
+            }
+            dispatch(toogleFollowingProgress(false, userId))
+
+        })
+            .catch(() => alert("Failed to follow users"))
+
+}}
+
+export const unfollow = (userId: string)  => {
+    return (dispatch: Dispatch) => {
+        dispatch(toogleIsFetching(true))
+        dispatch(toogleFollowingProgress(true, userId))
+        usersAPI.unfollow(userId).then(data => {
+
+            dispatch(toogleIsFetching(false))
+            if (data.resultCode == 0) {
+                dispatch(unfollowSuccess (userId))
+            }
+            dispatch(toogleFollowingProgress(false, userId))
+        })
+            .catch(() => alert("Failed to unfollow users"))
+
+}}
+
+
+
+
 
 export default usersReducer;
 
