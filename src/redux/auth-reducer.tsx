@@ -1,6 +1,8 @@
 import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
 import {v1} from "uuid";
+import {authAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export const SET_USER_DATA = `SET-USER-DATA`
 
@@ -38,6 +40,17 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthDataType =
 }
 
 export const setAuthUserData = (data: AuthDataType ) => ({type: SET_USER_DATA, data}) as const
+
+export const getAuthUserData = () => (dispatch: Dispatch) => {
+    return authAPI.me().then(response => {
+
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUserData(response.data.data))
+        }
+
+    })
+        .catch(() => alert("Most likely you are not logged in"))
+}
 
 
 export default authReducer;

@@ -5,11 +5,12 @@ import {ReactComponent} from "*.svg";
 import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {AuthDataType, setAuthUserData} from "../../redux/auth-reducer";
+import {AuthDataType, getAuthUserData} from "../../redux/auth-reducer";
+import {authAPI} from "../../api/api";
 
 
 type PropsType = {
-    setAuthUserData: (data: AuthDataType) => {},
+    getAuthUserData: () => void,
     isAuth: boolean,
     login: string,
 }
@@ -17,13 +18,7 @@ type PropsType = {
 class HeaderContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0//auth/me", {withCredentials: true}).then(response => {
-            debugger
-            if (response.data.resultCode === 0) {
-                this.props.setAuthUserData(response.data.data)
-            }
-
-        })
+        this.props.getAuthUserData()
     }
 
     render () {
@@ -42,4 +37,4 @@ const MapStateTpProps = (state: any) => ({
 
 
 
-export default connect(MapStateTpProps, {setAuthUserData}) (HeaderContainer);
+export default connect(MapStateTpProps, {getAuthUserData}) (HeaderContainer);
