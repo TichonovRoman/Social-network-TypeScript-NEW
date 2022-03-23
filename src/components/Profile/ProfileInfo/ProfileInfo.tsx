@@ -15,7 +15,8 @@ export type ProfileInfoPropsType = {
             small: string,
             large: string,
         }
-    }
+    },
+
 
 }
 

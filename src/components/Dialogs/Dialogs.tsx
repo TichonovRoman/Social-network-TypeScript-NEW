@@ -3,6 +3,7 @@ import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
+import {Redirect} from "react-router-dom";
 
 // type DialogsPropsType = {
 //
@@ -18,6 +19,8 @@ const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.dialogsPage.dialogs.map(m => <DialogItem key={m.id} name={m.name} id={m.id} avatar={m.avatar}/>)
     let messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
+
+    if (!props.isAuth) return <Redirect to={"/login"}/>
 
       return (
         <div className={s.dialogs}>
