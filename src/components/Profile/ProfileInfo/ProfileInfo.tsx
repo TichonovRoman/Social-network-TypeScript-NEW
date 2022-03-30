@@ -2,6 +2,7 @@ import React from 'react';
 import imgPicture from "../../../img/SunFlower.jpg";
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus";
 
 export type ProfileInfoPropsType = {
     profile: {
@@ -32,12 +33,15 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             <div>
                 <img className={s.sunflowerImg} src={imgPicture}/>
             </div>
+
+
             <div className={s.descriptionBlock}>
                  <img src={props.profile.photos.large}/>
                 <div>
                     Меня зовут: {props.profile.fullName}
                    <div>Обо мне: {props.profile.aboutMe}</div>
                 </div>
+                <ProfileStatus status = {"Hello my Friends"}/>
             </div>
         </div>
     );
