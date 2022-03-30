@@ -1,16 +1,18 @@
 import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
 export const SET_USER_PROFILE = `SET-USER-PROFILE`
+export const GET_MY_STATUS = `GET-MY-STATUS`
 
 
 export type ProfilePageType = {
     posts: Array<PostsDataType>,
     newPostText: string,
     profile: any,
+    status: string,
 
 }
 
@@ -22,7 +24,8 @@ let initialState: ProfilePageType = {
         {id: 4, message: "Cool", likesCount: 20},
     ] as Array<PostsDataType>,
     newPostText: 'it-kamasutra.com' as string,
-    profile: null
+    profile: null,
+    status: ""
 
 }
 
@@ -43,6 +46,8 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
 
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
+        case GET_MY_STATUS:
+            return {...state, status: action.status}
 
 
 
@@ -61,9 +66,33 @@ export const updateNewPostTextActionCreator = (text: string) => ({
     newText: text
 }) as const
 
+export const setMyStatus = (status: string) => ({type: GET_MY_STATUS, status}) as const
+
+
+
+
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) =>{
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data))
+    })
+}
+
+export const setStatus = (userId: string) => (dispatch: Dispatch) =>{
+    profileAPI.getStatus(userId).then(response => {
+        debugger
+        dispatch(setMyStatus(response.data))
+    })
+}
+
+export const updateStatus = (status: string) => (dispatch: Dispatch) =>{
+    profileAPI.updateStatus(status).then(response => {
+        if(response.data.resultCode === 0) {
+
+            dispatch(setMyStatus(status))
+        }
+
+
+
     })
 }
 

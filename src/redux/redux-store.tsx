@@ -1,6 +1,11 @@
 import React from "react"
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
+import profileReducer, {
+    addPostActionCreator, setMyStatus,
+    setStatus,
+    setUserProfile,
+    updateNewPostTextActionCreator
+} from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
 import usersReducer, {
@@ -38,7 +43,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof toogleIsFetching>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
-    | ReturnType<typeof toogleFollowingProgress>;
+    | ReturnType<typeof toogleFollowingProgress>
+    | ReturnType<typeof setMyStatus>;
 
 
 

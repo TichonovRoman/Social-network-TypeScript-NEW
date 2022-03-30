@@ -28,8 +28,7 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthDataType =
 
     switch (action.type) {
         case SET_USER_DATA:
-            debugger
-            return  {...state, ...action.data, isAuth: true}
+                    return  {...state, ...action.data, isAuth: true}
 
 
         default:

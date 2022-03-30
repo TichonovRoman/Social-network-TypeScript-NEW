@@ -13,7 +13,8 @@ test("in dialogs should add post", () => {
             {id: 4, message: "Cool", likesCount: 20},
         ],
         newPostText: 'it-kamasutra.com',
-        profile: null
+        profile: null,
+        status: ""
     }
 
     initialState = profileReducer(initialState, addPostActionCreator())
@@ -32,7 +33,8 @@ test("in dialogs should update post", () => {
             {id: 4, message: "Cool", likesCount: 20},
         ],
         newPostText: 'it-kamasutra.com',
-        profile: null
+        profile: null,
+        status: ""
     }
 
     initialState = profileReducer(initialState, updateNewPostTextActionCreator("Hi peoples"))

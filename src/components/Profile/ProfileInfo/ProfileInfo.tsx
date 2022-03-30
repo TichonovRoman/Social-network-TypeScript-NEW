@@ -17,6 +17,8 @@ export type ProfileInfoPropsType = {
             large: string,
         }
     },
+    status: string,
+    updateStatus: (status: string) => void
 
 
 }
@@ -41,7 +43,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     Меня зовут: {props.profile.fullName}
                    <div>Обо мне: {props.profile.aboutMe}</div>
                 </div>
-                <ProfileStatus status = {"Hello my Friends"}/>
+                <ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>
             </div>
         </div>
     );
