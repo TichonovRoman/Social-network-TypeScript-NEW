@@ -17,6 +17,7 @@ import usersReducer, {
 } from "./users-reducer";
 import authReducer, {setAuthUserData} from "./auth-reducer";
 
+
 import thunkMiddleware from "redux-thunk"
 
 export const rootReducers = combineReducers({
@@ -25,6 +26,7 @@ export const rootReducers = combineReducers({
     friends: friendsReducer,
     usersPage: usersReducer,
     auth: authReducer,
+
 })
 
 export type AppStateType = ReturnType<typeof rootReducers>
