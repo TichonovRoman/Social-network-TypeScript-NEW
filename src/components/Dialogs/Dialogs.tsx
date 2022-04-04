@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from "react-router-dom";
 import {useFormik} from "formik";
-import {MessageForm} from "../universalTextarea/MessageForm";
+import {AddMessageForm} from "../universalTextarea/MessageForm";
 
 // type DialogsPropsType = {
 //
@@ -23,9 +23,7 @@ const Dialogs = (props: DialogsPropsType) => {
                                                                          avatar={m.avatar}/>)
     let messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
-    // if (!props.isAuth) return <Redirect to={"/login"}/>
-
-    return (
+     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
 
@@ -38,11 +36,11 @@ const Dialogs = (props: DialogsPropsType) => {
 
             <div className={s.messages}>
                 {messagesElements}
-               <MessageForm onSubmit = {props.addMessage} placeholderText={"Enter your message"}/>
-
+               <AddMessageForm onSubmit = {props.addMessage}
+                            placeholderText={"Enter your message"}
+                            textMaxLength={100}
+               />
             </div>
-
-
         </div>
     );
 }

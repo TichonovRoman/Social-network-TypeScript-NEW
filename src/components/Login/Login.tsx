@@ -10,6 +10,27 @@ type initialValuesType = {
 
 }
 
+type ErrorsType = {
+    password?: string,
+    email?: string
+}
+
+const validate = (values: initialValuesType )=> {
+    const errors: ErrorsType = {};
+
+   if (!values.password) {
+        errors.password = 'Before sending, you must fill in this field';
+    }
+
+    if (!values.email) {
+        errors.email = 'Before sending, you must fill in this field';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address';
+    }
+
+    return errors;
+};
+
 export const LoginForm = () => {
     // const instance = axios.create({
     //         baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -28,6 +49,7 @@ export const LoginForm = () => {
             rememberMe: false,
             captcha: true,
         },
+        validate,
         onSubmit: (values:initialValuesType) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
 
             alert(JSON.stringify(values, null, 2));
@@ -36,6 +58,8 @@ export const LoginForm = () => {
             //     Также уже установлен  yup - через него можно делать валидацию
         },
     });
+    let errorsPassword: string = !!(formik.touched.password && formik.errors.password) ? "pink" : ""
+    let errorsEmail: string = !!(formik.touched.email && formik.errors.email) ? "pink" : ""
 
 
     return (
@@ -46,8 +70,13 @@ export const LoginForm = () => {
                        value={formik.values.email}
                        id="email"
                        name="email"
+                       onBlur={formik.handleBlur}
+                       style={{backgroundColor: errorsEmail}}
 
                 />
+                {errorsEmail ? (
+                    <div style={{color: "red"}}>{formik.errors.email}</div>
+                ) : null}
             </div>
             <div>
                 <input placeholder={"Password"}
@@ -55,8 +84,14 @@ export const LoginForm = () => {
                        value={formik.values.password}
                        id="password"
                        name="password"
+                       onBlur={formik.handleBlur}
+                       style={{backgroundColor: errorsPassword}}
 
                 />
+                {errorsPassword ? (
+                    <div style={{color: "red"}}>{formik.errors.password}</div>
+                ) : null}
+
             </div>
             <div>
                 <input type={"checkbox"}
@@ -69,7 +104,7 @@ export const LoginForm = () => {
                 /> remember me
             </div>
             <div>
-                <button type={"submit"}>Login</button>
+                <button type={"submit"} disabled={!!(formik.errors.email || !!formik.errors.password)}>Login</button>
             </div>
         </form>
 
