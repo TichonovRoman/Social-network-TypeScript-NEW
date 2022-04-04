@@ -4,6 +4,8 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from "react-router-dom";
+import {useFormik} from "formik";
+import {MessageForm} from "../universalTextarea/MessageForm";
 
 // type DialogsPropsType = {
 //
@@ -17,38 +19,33 @@ import {Redirect} from "react-router-dom";
 
 const Dialogs = (props: DialogsPropsType) => {
 
-    let dialogsElements = props.dialogsPage.dialogs.map(m => <DialogItem key={m.id} name={m.name} id={m.id} avatar={m.avatar}/>)
+    let dialogsElements = props.dialogsPage.dialogs.map(m => <DialogItem key={m.id} name={m.name} id={m.id}
+                                                                         avatar={m.avatar}/>)
     let messagesElements = props.dialogsPage.messages.map(m => <Message key={m.id} message={m.message}/>)
 
     // if (!props.isAuth) return <Redirect to={"/login"}/>
 
-      return (
+    return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
 
                 <div className={s.active}>
-                    <DialogItem name={props.dialogsPage.dialogs[0].name} id={props.dialogsPage.dialogs[0].id} avatar={props.dialogsPage.dialogs[0].avatar}/>
+                    <DialogItem name={props.dialogsPage.dialogs[0].name} id={props.dialogsPage.dialogs[0].id}
+                                avatar={props.dialogsPage.dialogs[0].avatar}/>
                 </div>
                 {dialogsElements}
             </div>
 
             <div className={s.messages}>
                 {messagesElements}
-                <textarea
-                          onChange={props.onMessageChange}
-                          value={props.dialogsPage.newMessageText}
-                          placeholder={"Enter your message"}
-
-                />
-                <div>
-                    <button onClick={props.addMessage}>Add message</button>
-                </div>
+               <MessageForm onSubmit = {props.addMessage} placeholderText={"Enter your message"}/>
 
             </div>
 
 
         </div>
     );
-};
+}
+
 
 export default Dialogs;

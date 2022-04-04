@@ -4,9 +4,9 @@ import profileReducer, {
     addPostActionCreator, setMyStatus,
     setStatus,
     setUserProfile,
-    updateNewPostTextActionCreator
+
 } from "./profile-reducer";
-import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
+import dialogsReducer, {addMessageActionCreator} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
 import usersReducer, {
     followSuccess ,
@@ -33,10 +33,11 @@ export type AppStateType = ReturnType<typeof rootReducers>
 
 let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
 
+
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
+    // | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>
+    // | ReturnType<typeof updateNewMessageTextActionCreator>
     | ReturnType<typeof followSuccess >
     | ReturnType<typeof unfollowSuccess >
     | ReturnType<typeof setUsers>

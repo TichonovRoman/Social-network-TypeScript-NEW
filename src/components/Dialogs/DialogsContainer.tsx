@@ -2,7 +2,6 @@ import React, {ChangeEvent} from 'react';
 import {
     addMessageActionCreator,
     MessagesPageType,
-    updateNewMessageTextActionCreator
 } from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
@@ -27,8 +26,8 @@ type MapStatePropsType = {
 }
 
 type MapDispatchToPropsType = {
-    onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-    addMessage: () => void
+    // onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    addMessage: (text:string) => void
 }
 
 export type DialogsPropsType = MapStatePropsType & MapDispatchToPropsType
@@ -41,12 +40,12 @@ let mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            let text = e.currentTarget.value
-            let action = updateNewMessageTextActionCreator(text)
-            dispatch(action)
-        },
-        addMessage: () => dispatch(addMessageActionCreator())
+        // onMessageChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
+        //     let text = e.currentTarget.value
+        //     let action = updateNewMessageTextActionCreator(text)
+        //     dispatch(action)
+        // },
+        addMessage: (text) => dispatch(addMessageActionCreator(text))
 
     }
 }

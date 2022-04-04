@@ -10,7 +10,7 @@ export const GET_MY_STATUS = `GET-MY-STATUS`
 
 export type ProfilePageType = {
     posts: Array<PostsDataType>,
-    newPostText: string,
+    // newPostText: string,
     profile: any,
     status: string,
 
@@ -23,7 +23,7 @@ let initialState: ProfilePageType = {
         {id: 3, message: "Hi", likesCount: 56},
         {id: 4, message: "Cool", likesCount: 20},
     ] as Array<PostsDataType>,
-    newPostText: 'it-kamasutra.com' as string,
+    // newPostText: 'it-kamasutra.com' as string,
     profile: null,
     status: ""
 
@@ -35,14 +35,14 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
         case ADD_POST:
             const newPost: PostsDataType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.text,
                 likesCount: 0,
             }
-            const newState = {...state, posts: [...state.posts, newPost], newPostText: ""}
+            const newState = {...state, posts: [...state.posts, newPost]}
             return newState;
 
-        case UPDATE_NEW_POST_TEXT:
-            return {...state, newPostText: action.newText}
+        // case UPDATE_NEW_POST_TEXT:
+        //     return {...state, newPostText: action.newText}
 
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
@@ -58,13 +58,13 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
 
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
+export const addPostActionCreator = (text: string) => ({type: ADD_POST, text}) as const
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile}) as const
 
-export const updateNewPostTextActionCreator = (text: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text
-}) as const
+// export const updateNewPostTextActionCreator = (text: string) => ({
+//     type: UPDATE_NEW_POST_TEXT,
+//     newText: text
+// }) as const
 
 export const setMyStatus = (status: string) => ({type: GET_MY_STATUS, status}) as const
 

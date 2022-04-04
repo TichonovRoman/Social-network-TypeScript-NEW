@@ -2,7 +2,7 @@ import {ActionsTypes} from "./redux-store";
 
 
 export const ADD_MESSAGE = `ADD-MESSAGE`;
-export const UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`
+// export const UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`
 
 export type MessagesDataType = {
     id: string
@@ -17,7 +17,7 @@ export type DialogDataType = {
 export type MessagesPageType = {
     messages: Array<MessagesDataType>,
     dialogs: Array<DialogDataType>,
-    newMessageText: string,
+    // newMessageText: string,
 }
 
 let initialState = {
@@ -49,7 +49,7 @@ let initialState = {
             avatar: `https://placepic.ru/wp-content/uploads/2021/02/image_562610131056464036330.jpg`
         },
     ] as Array<DialogDataType>,
-    newMessageText: '' as string,
+    // newMessageText: '' as string,
 }
 
 export const dialogsReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {
@@ -58,12 +58,12 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
         case ADD_MESSAGE:
             const newMessage: MessagesDataType = {
                 id: "3433",
-                message: state.newMessageText,
+                message: action.text,
             }
-            const newState = {...state, messages: [...state.messages, newMessage], newMessageText: ''}
+            const newState = {...state, messages: [...state.messages, newMessage]}
             return newState
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {...state, newMessageText: action.newText}
+        // case UPDATE_NEW_MESSAGE_TEXT:
+        //     return {...state, newMessageText: action.newText}
 
 
         default:
@@ -73,12 +73,12 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
 
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE}) as const
+export const addMessageActionCreator = (text:string) => ({type: ADD_MESSAGE, text: text }) as const
 
-export const updateNewMessageTextActionCreator = (text: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text
-}) as const
+// export const updateNewMessageTextActionCreator = (text: string) => ({
+//     type: UPDATE_NEW_MESSAGE_TEXT,
+//     newText: text
+// }) as const
 
 
 export default dialogsReducer

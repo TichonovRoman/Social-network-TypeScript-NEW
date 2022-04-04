@@ -1,4 +1,4 @@
-import profileReducer, {addPostActionCreator, ProfilePageType, updateNewPostTextActionCreator} from "./profile-reducer";
+import profileReducer, {addPostActionCreator, ProfilePageType} from "./profile-reducer";
 import {v1} from "uuid";
 import usersReducer, {
     followSuccess ,
