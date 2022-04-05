@@ -56,8 +56,9 @@ export const LoginForm = (props: any) => {
             captcha: true,
         },
         validate,
-        onSubmit: (values: initialValuesType) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
-            props.login(values)
+        onSubmit: (values: initialValuesType, { setSubmitting, setStatus}) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
+            props.login(values, setStatus)
+            setSubmitting(false);
             // authAPI.login(values)
             // alert(JSON.stringify(values, null, 2));
             // instance.post("/auth/login", values)
@@ -72,7 +73,7 @@ export const LoginForm = (props: any) => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
-                <input placeholder={"Login"}
+                              <input placeholder={"Login"}
                        onChange={formik.handleChange}
                        value={formik.values.email}
                        id="email"
@@ -111,6 +112,11 @@ export const LoginForm = (props: any) => {
 
                 /> remember me
             </div>
+            <div style={{color: "red"}}>
+                {formik.status}
+            </div>
+
+
             <div>
                 <button type={"submit"} disabled={!!(formik.errors.email || !!formik.errors.password)}>Login</button>
             </div>

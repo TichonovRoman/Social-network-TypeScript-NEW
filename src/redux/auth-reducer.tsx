@@ -4,6 +4,7 @@ import {v1} from "uuid";
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {initialValuesType} from "../components/Login/Login";
+import {setStatus} from "./profile-reducer";
 
 export const SET_USER_DATA = `SET-USER-DATA`
 export const RESET_USER_AUTH_DATA = `RESET-USER-AUTH-DATA`
@@ -57,15 +58,15 @@ export const getAuthUserData = () => (dispatch: Dispatch) => {
         .catch(() => alert("Most likely you are not logged in"))
 }
 
-export const login = (values: initialValuesType) => (dispatch: Dispatch) => {
+export const login = (values: initialValuesType, setStatus: (status?: any) => void) => (dispatch: Dispatch) => {
 
     authAPI.login(values)
         .then(response => {
-            debugger
-            if (response.data.resultCode === 0) {
 
+            if (response.data.resultCode === 0) {
                 dispatch(setAuthUserData(response.data.data))
                }
+            else { setStatus(response.data.messages) }
 
         })
         .catch(() => alert("Most likely you are not logged in"))
