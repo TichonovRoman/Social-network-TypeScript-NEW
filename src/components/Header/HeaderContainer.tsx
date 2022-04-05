@@ -5,12 +5,13 @@ import {ReactComponent} from "*.svg";
 import Header from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
-import {AuthDataType, getAuthUserData} from "../../redux/auth-reducer";
+import {AuthDataType, getAuthUserData, logout} from "../../redux/auth-reducer";
 import {authAPI} from "../../api/api";
 
 
 type PropsType = {
     getAuthUserData: () => void,
+    logout: () => void,
     isAuth: boolean,
     login: string,
 }
@@ -24,6 +25,7 @@ class HeaderContainer extends React.Component<PropsType> {
     render () {
         return <Header isAuth =  {this.props.isAuth}
                        login =  {this.props.login}
+                       logout =  {this.props.logout}
 
         />
     }
@@ -37,4 +39,4 @@ const MapStateTpProps = (state: any) => ({
 
 
 
-export default connect(MapStateTpProps, {getAuthUserData}) (HeaderContainer);
+export default connect(MapStateTpProps, {getAuthUserData, logout}) (HeaderContainer);

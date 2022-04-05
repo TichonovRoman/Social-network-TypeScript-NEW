@@ -15,7 +15,7 @@ import usersReducer, {
     setUsers, toogleFollowingProgress, toogleIsFetching,
     unfollowSuccess
 } from "./users-reducer";
-import authReducer, {setAuthUserData} from "./auth-reducer";
+import authReducer, {resetAuthDataAC, setAuthUserData} from "./auth-reducer";
 
 
 import thunkMiddleware from "redux-thunk"
@@ -47,7 +47,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toogleFollowingProgress>
-    | ReturnType<typeof setMyStatus>;
+    | ReturnType<typeof setMyStatus>
+    | ReturnType<typeof resetAuthDataAC>;
 
 
 

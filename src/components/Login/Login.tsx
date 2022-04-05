@@ -1,12 +1,17 @@
 import React from "react";
 import {useFormik} from "formik";
 import axios from "axios";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
+import {authAPI} from "../../api/api";
+import {Redirect} from "react-router-dom";
+import {AppStateType} from "../../redux/redux-store";
 
-type initialValuesType = {
-        email: string,
-        password: string,
-        rememberMe: boolean,
-        captcha: boolean,
+export type initialValuesType = {
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: boolean,
 
 }
 
@@ -15,10 +20,10 @@ type ErrorsType = {
     email?: string
 }
 
-const validate = (values: initialValuesType )=> {
+const validate = (values: initialValuesType) => {
     const errors: ErrorsType = {};
 
-   if (!values.password) {
+    if (!values.password) {
         errors.password = 'Before sending, you must fill in this field';
     }
 
@@ -31,7 +36,7 @@ const validate = (values: initialValuesType )=> {
     return errors;
 };
 
-export const LoginForm = () => {
+export const LoginForm = (props: any) => {
     // const instance = axios.create({
     //         baseURL: `https://social-network.samuraijs.com/api/1.0/`,
     //         withCredentials: true,
@@ -40,6 +45,7 @@ export const LoginForm = () => {
     //         }
     //     }
     // )
+
 
     const formik = useFormik({
 
@@ -50,9 +56,10 @@ export const LoginForm = () => {
             captcha: true,
         },
         validate,
-        onSubmit: (values:initialValuesType) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
-
-            alert(JSON.stringify(values, null, 2));
+        onSubmit: (values: initialValuesType) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
+            props.login(values)
+            // authAPI.login(values)
+            // alert(JSON.stringify(values, null, 2));
             // instance.post("/auth/login", values)
             //     .then(res => console.log(res)) запрос работает, все хорошо, логинит.
             //     Также уже установлен  yup - через него можно делать валидацию
@@ -86,6 +93,7 @@ export const LoginForm = () => {
                        name="password"
                        onBlur={formik.handleBlur}
                        style={{backgroundColor: errorsPassword}}
+                       type={"password"}
 
                 />
                 {errorsPassword ? (
@@ -111,12 +119,21 @@ export const LoginForm = () => {
     )
 
 }
-export const Login = () => {
+const Login = (props: any) => {
+
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
+
     return <div>
         <h2>Dear user, you need to log in</h2>
-        <LoginForm/>
-
-
+        <LoginForm login={props.login}/>
     </div>
-
 }
+
+const mapStateToProps = (state: AppStateType) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login)
+

@@ -3,10 +3,10 @@ import {ActionsTypes} from "./redux-store";
 import {v1} from "uuid";
 import {authAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {initialValuesType} from "../components/Login/Login";
 
 export const SET_USER_DATA = `SET-USER-DATA`
-
-
+export const RESET_USER_AUTH_DATA = `RESET-USER-AUTH-DATA`
 
 
 export type AuthDataType = {
@@ -16,7 +16,7 @@ export type AuthDataType = {
     isAuth: boolean,
 }
 
-let initialState: AuthDataType= {
+let initialState: AuthDataType = {
     email: null,
     id: null,
     login: null,
@@ -28,7 +28,12 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthDataType =
 
     switch (action.type) {
         case SET_USER_DATA:
-                    return  {...state, ...action.data, isAuth: true}
+            return {...state, ...action.data, isAuth: true}
+        case RESET_USER_AUTH_DATA:
+            return {
+                ...state,
+                ...initialState
+            }
 
 
         default:
@@ -38,16 +43,43 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthDataType =
 
 }
 
-export const setAuthUserData = (data: AuthDataType ) => ({type: SET_USER_DATA, data}) as const
+export const setAuthUserData = (data: AuthDataType) => ({type: SET_USER_DATA, data}) as const
+export const resetAuthDataAC = () => ({type: RESET_USER_AUTH_DATA}) as const
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    return authAPI.me().then(response => {
+    authAPI.me().then(response => {
 
         if (response.data.resultCode === 0) {
             dispatch(setAuthUserData(response.data.data))
         }
 
     })
+        .catch(() => alert("Most likely you are not logged in"))
+}
+
+export const login = (values: initialValuesType) => (dispatch: Dispatch) => {
+
+    authAPI.login(values)
+        .then(response => {
+            debugger
+            if (response.data.resultCode === 0) {
+
+                dispatch(setAuthUserData(response.data.data))
+               }
+
+        })
+        .catch(() => alert("Most likely you are not logged in"))
+}
+
+export const logout = () => (dispatch: Dispatch) => {
+    authAPI.logout()
+        .then(response => {
+
+            if (response.data.resultCode === 0) {
+                dispatch(resetAuthDataAC())
+            }
+
+        })
         .catch(() => alert("Most likely you are not logged in"))
 }
 

@@ -1,4 +1,5 @@
 import axios from "axios";
+import {initialValuesType} from "../components/Login/Login";
 
 
 const instance = axios.create({
@@ -42,5 +43,13 @@ export const profileAPI = {
 export const authAPI = {
     me() {
         return instance.get("auth/me")
+    },
+    login(values: initialValuesType) {
+        return instance.post("/auth/login", values)
+
+    },
+    logout() {
+        return instance.delete("/auth/login")
+
     }
 }
