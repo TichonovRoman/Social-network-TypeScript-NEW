@@ -17,32 +17,18 @@ const Navbar: React.FC<NavbarType> = (props) => {
 
     let friendsList = props.friends.map(m => <div key={m.id} className={s.friends}><img src={m.avatar}/>{m.name}</div>)
 
+    const finalClass = (isActive: boolean) => isActive ? `${s.item} ${s.activeLink}` : `${s.item}`
+
     return (
         <nav className={s.nav}>
-            <div className={s.item}>
-                <NavLink to="/profile">Profile</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to="/dialogs">Messages</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to="/users">Users</NavLink>
-            </div>
 
-            <div className={s.item}>
-                <NavLink to="/news">News</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to="/music">Music</NavLink>
-            </div>
-            <div className={s.item}>
-                <NavLink to="/settings">Settings</NavLink>
-            </div>
-
-            <div className={s.itemFriends}>
-                <NavLink to="/friends">Friends</NavLink>
-            </div>
-
+                <NavLink to="/profile" className={(isActive) => finalClass(isActive)}>Profile</NavLink>
+                <NavLink to="/dialogs" className={(isActive) => finalClass(isActive)}>Messages</NavLink>
+                <NavLink to="/users" className={(isActive) => finalClass(isActive)}>Users</NavLink>
+                <NavLink to="/news" className={(isActive) => finalClass(isActive)}>News</NavLink>
+                <NavLink to="/music" className={(isActive) => finalClass(isActive)}>Music</NavLink>
+                <NavLink to="/settings" className={(isActive) => finalClass(isActive)}>Settings</NavLink>
+                <NavLink to="/friends" className={(isActive) => finalClass(isActive)}>Friends</NavLink>
 
             <div className={s.friendsList}>
                 {friendsList}

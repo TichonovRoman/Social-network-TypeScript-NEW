@@ -2,8 +2,10 @@
     grid-area: n;
     background-color: navajowhite;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
    }
-.item a {
+.item {
     color: chocolate;
     font-weight: bold;
     text-decoration: none;
@@ -14,13 +16,17 @@
 /*    font-weight: bolder;*/
 /*}*/
 
-.item a:active, .item a:focus {
+.item:active, .item:focus {
     color: maroon;
     font-size: 20px;
 }
 
-.item a:hover {
+.item:hover {
     color: maroon;
+}
+.activeLink {
+    color: maroon;
+    font-size: 20px;
 }
 
 .itemFriends a {
@@ -45,6 +51,7 @@
 }
 
 .friendsList {
+    padding-top: 20px;
     display: grid;
     grid-template-areas: "a b c";
 }
