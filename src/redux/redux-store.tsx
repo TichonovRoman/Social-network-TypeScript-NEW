@@ -19,6 +19,7 @@ import authReducer, {resetAuthDataAC, setAuthUserData} from "./auth-reducer";
 
 
 import thunkMiddleware from "redux-thunk"
+import appReducer, {initializedSuccessAC} from "./app-reducer";
 
 export const rootReducers = combineReducers({
     profilePage: profileReducer,
@@ -26,6 +27,7 @@ export const rootReducers = combineReducers({
     friends: friendsReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    app: appReducer,
 
 })
 
@@ -48,7 +50,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toogleFollowingProgress>
     | ReturnType<typeof setMyStatus>
-    | ReturnType<typeof resetAuthDataAC>;
+    | ReturnType<typeof resetAuthDataAC>
+    | ReturnType<typeof initializedSuccessAC>;
 
 
 

@@ -48,7 +48,7 @@ export const setAuthUserData = (data: AuthDataType) => ({type: SET_USER_DATA, da
 export const resetAuthDataAC = () => ({type: RESET_USER_AUTH_DATA}) as const
 
 export const getAuthUserData = () => (dispatch: Dispatch) => {
-    authAPI.me().then(response => {
+    return authAPI.me().then(response => {
 
         if (response.data.resultCode === 0) {
             dispatch(setAuthUserData(response.data.data))

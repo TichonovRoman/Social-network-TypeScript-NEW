@@ -1,15 +1,10 @@
 import React from 'react';
-import MyPosts from "./MyPosts/MyPosts";
-import ProfileInfo, {ProfileInfoPropsType} from "./ProfileInfo/ProfileInfo";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {getUserProfile, setMyStatus, setStatus, setUserProfile, updateStatus} from "../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {getUserProfile, setStatus,updateStatus} from "../../redux/profile-reducer";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
-import {usersAPI} from "../../api/api";
-import withAuthRedirect from "../../hoc/withAuthRedirect";
+
 import {compose} from "redux";
 
 // type ProfilePropsType = {
@@ -22,8 +17,6 @@ import {compose} from "redux";
 type PathParamsType = {
     userId: string,
 }
-
-
 
 
 type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
@@ -58,7 +51,11 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if (!userId) userId= this.props.authorizedUserId ? this.props.authorizedUserId.toString() : ""
+        if (!userId) {
+            userId= this.props.authorizedUserId ? this.props.authorizedUserId.toString() : ""
+            if(!userId) this.props.history.push("/login")
+
+        }
         this.props.getUserProfile(userId)
         this.props.setStatus(userId)
 

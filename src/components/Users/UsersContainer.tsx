@@ -88,7 +88,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
 // })(UsersContainer))
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+    // withAuthRedirect,
     connect(mapStateToProps, {
         followSuccess , unfollowSuccess , toogleIsFetching,
         toogleFollowingProgress, getUsers, follow, unfollow

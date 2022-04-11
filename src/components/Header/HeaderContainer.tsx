@@ -1,26 +1,16 @@
 import React from 'react';
-import s from "./Header.module.css"
-import {NavLink} from 'react-router-dom';
-import {ReactComponent} from "*.svg";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {AuthDataType, getAuthUserData, logout} from "../../redux/auth-reducer";
-import {authAPI} from "../../api/api";
+import {logout} from "../../redux/auth-reducer";
 
 
 type PropsType = {
-    getAuthUserData: () => void,
     logout: () => void,
     isAuth: boolean,
     login: string,
 }
 
 class HeaderContainer extends React.Component<PropsType> {
-
-    componentDidMount() {
-        this.props.getAuthUserData()
-    }
 
     render () {
         return <Header isAuth =  {this.props.isAuth}
@@ -39,4 +29,4 @@ const MapStateTpProps = (state: any) => ({
 
 
 
-export default connect(MapStateTpProps, {getAuthUserData, logout}) (HeaderContainer);
+export default connect(MapStateTpProps, {logout}) (HeaderContainer);
