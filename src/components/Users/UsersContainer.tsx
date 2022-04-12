@@ -98,8 +98,6 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state),
-
-
     }
 }
 
