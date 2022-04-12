@@ -81,10 +81,11 @@ export const toogleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCH
 export const toogleFollowingProgress = (isFetching : boolean, userId: string) => ({type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching, userId}) as const
 
 
-export const getUsers = (currentPage: number, pageSize: number)  => {
+export const requestUsers = (page: number, pageSize: number)  => {
     return (dispatch: Dispatch) => {
     dispatch(toogleIsFetching(true))
-    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPage(page))
+    usersAPI.getUsers(page, pageSize).then(data => {
         dispatch(toogleIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalUsersCount(data.totalCount))
