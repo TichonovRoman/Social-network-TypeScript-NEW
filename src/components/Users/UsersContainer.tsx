@@ -9,7 +9,6 @@ import {
 } from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {
     getCurrentPage,
@@ -69,9 +68,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    followingInProgress = {this.props.followingInProgress}
                    follow = {this.props.follow}
                    unfollow = {this.props.unfollow}
-                // isFetching = {this.props.isFetching}
-
-            />
+               />
         </div>
 
     }
