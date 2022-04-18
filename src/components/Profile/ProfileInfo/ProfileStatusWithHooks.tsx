@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, useEffect, useState} from 'react';
 
 type ProfileStatusWithHooksType = {
     status: string,
@@ -10,6 +10,10 @@ const ProfileStatusWithHooks = (props: ProfileStatusWithHooksType) => {
 
     let [status, setStatus] = useState(props.status)
     let [spanOn, setSpanOn] = useState(true)
+
+    useEffect(()=>{
+        setStatus(props.status)
+    }, [props.status])
 
     const activateMode = () => {
         setSpanOn(false)
