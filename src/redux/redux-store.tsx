@@ -1,7 +1,7 @@
 import React from "react"
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {
-    addPostActionCreator, setMyStatus,
+    addPostActionCreator, deletePostActionCreator, setMyStatus,
     setStatus,
     setUserProfile,
 
@@ -39,6 +39,7 @@ let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     // | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof deletePostActionCreator>
     // | ReturnType<typeof updateNewMessageTextActionCreator>
     | ReturnType<typeof followSuccess >
     | ReturnType<typeof unfollowSuccess >

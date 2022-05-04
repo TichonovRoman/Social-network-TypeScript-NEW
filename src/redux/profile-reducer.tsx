@@ -6,6 +6,7 @@ export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
 export const SET_USER_PROFILE = `SET-USER-PROFILE`
 export const GET_MY_STATUS = `GET-MY-STATUS`
+export const DELETE_POST = `DELETE-POST`
 
 
 export type ProfilePageType = {
@@ -44,6 +45,8 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
         // case UPDATE_NEW_POST_TEXT:
         //     return {...state, newPostText: action.newText}
 
+        case DELETE_POST:
+            return {...state, posts: [...state.posts.filter(p => p.id != action.postId)]}
         case SET_USER_PROFILE:
             return {...state, profile: action.profile}
         case GET_MY_STATUS:
@@ -59,6 +62,7 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
 }
 
 export const addPostActionCreator = (text: string) => ({type: ADD_POST, text}) as const
+export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST, postId}) as const
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile}) as const
 
 // export const updateNewPostTextActionCreator = (text: string) => ({
