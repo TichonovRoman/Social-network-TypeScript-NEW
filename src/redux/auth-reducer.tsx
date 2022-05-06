@@ -6,8 +6,8 @@ import {Dispatch} from "redux";
 import {initialValuesType} from "../components/Login/Login";
 import {setStatus} from "./profile-reducer";
 
-export const SET_USER_DATA = `SET-USER-DATA`
-export const RESET_USER_AUTH_DATA = `RESET-USER-AUTH-DATA`
+export const SET_USER_DATA = `social-network/auth/SET-USER-DATA`
+export const RESET_USER_AUTH_DATA = `social-network/auth/RESET-USER-AUTH-DATA`
 
 
 export type AuthDataType = {
@@ -47,41 +47,34 @@ const authReducer = (state = initialState, action: ActionsTypes): AuthDataType =
 export const setAuthUserData = (data: AuthDataType) => ({type: SET_USER_DATA, data}) as const
 export const resetAuthDataAC = () => ({type: RESET_USER_AUTH_DATA}) as const
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    return authAPI.me().then(response => {
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.me();
 
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserData(response.data.data))
-        }
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(response.data.data))
+    }
 
-    })
-        .catch(() => alert("Most likely you are not logged in"))
+
+    // .catch(() => alert("Most likely you are not logged in"))
 }
 
-export const login = (values: initialValuesType, setStatus: (status?: any) => void) => (dispatch: Dispatch) => {
+export const login = (values: initialValuesType, setStatus: (status?: any) => void) => async (dispatch: Dispatch) => {
 
-    authAPI.login(values)
-        .then(response => {
-
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData(response.data.data))
-               }
-            else { setStatus(response.data.messages) }
-
-        })
-        .catch(() => alert("Most likely you are not logged in"))
+    let response = await authAPI.login(values);
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData(response.data.data))
+    } else {
+        setStatus(response.data.messages)
+    }
+    // .catch(() => alert("Most likely you are not logged in"))
 }
 
-export const logout = () => (dispatch: Dispatch) => {
-    authAPI.logout()
-        .then(response => {
-
-            if (response.data.resultCode === 0) {
-                dispatch(resetAuthDataAC())
-            }
-
-        })
-        .catch(() => alert("Most likely you are not logged in"))
+export const logout = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.logout();
+    if (response.data.resultCode === 0) {
+        dispatch(resetAuthDataAC())
+    }
+    // .catch(() => alert("Most likely you are not logged in"))
 }
 
 
