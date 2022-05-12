@@ -17,18 +17,12 @@ import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
 
-
-
 type AppPropsType = {
     initializeApp: () => void,
     initialized: boolean
-
-
 }
 
-
 class App extends React.Component<AppPropsType> {
-
 
     componentDidMount() {
        this.props.initializeApp()
@@ -47,10 +41,7 @@ class App extends React.Component<AppPropsType> {
                         <Navbar friends={store.store.getState().friends}/>
                     )
                     }
-
                 </ReactReduxContext.Consumer>
-
-
                 <div className="app-wrapper-content">
                     <>
                         <Route path={"/dialogs"} component={DialogsContainer}/>

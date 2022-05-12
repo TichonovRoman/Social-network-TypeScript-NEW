@@ -37,15 +37,6 @@ const validate = (values: initialValuesType) => {
 };
 
 export const LoginForm = (props: any) => {
-    // const instance = axios.create({
-    //         baseURL: `https://social-network.samuraijs.com/api/1.0/`,
-    //         withCredentials: true,
-    //         headers: {
-    //             "API-KEY": "cdcf9189-0a6c-4ea6-a766-22c26d9d1d3e"
-    //         }
-    //     }
-    // )
-
 
     const formik = useFormik({
 
@@ -56,14 +47,9 @@ export const LoginForm = (props: any) => {
             captcha: true,
         },
         validate,
-        onSubmit: (values: initialValuesType, { setSubmitting, setStatus}) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
+        onSubmit: (values: initialValuesType, {setSubmitting, setStatus}) => { //автоматически передается в кнопку, здесь моно сделать запрос на сервер
             props.login(values, setStatus)
             setSubmitting(false);
-            // authAPI.login(values)
-            // alert(JSON.stringify(values, null, 2));
-            // instance.post("/auth/login", values)
-            //     .then(res => console.log(res)) запрос работает, все хорошо, логинит.
-            //     Также уже установлен  yup - через него можно делать валидацию
         },
     });
     let errorsPassword: string = !!(formik.touched.password && formik.errors.password) ? "pink" : ""
@@ -73,7 +59,7 @@ export const LoginForm = (props: any) => {
     return (
         <form onSubmit={formik.handleSubmit}>
             <div>
-                              <input placeholder={"Login"}
+                <input placeholder={"Login"}
                        onChange={formik.handleChange}
                        value={formik.values.email}
                        id="email"

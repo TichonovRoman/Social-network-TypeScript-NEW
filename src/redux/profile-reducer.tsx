@@ -2,6 +2,7 @@ import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+
 export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
 export const SET_USER_PROFILE = `SET-USER-PROFILE`
@@ -53,7 +54,6 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
             return {...state, status: action.status}
 
 
-
         default:
             return state
     }
@@ -64,39 +64,25 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
 export const addPostActionCreator = (text: string) => ({type: ADD_POST, text}) as const
 export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST, postId}) as const
 export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile}) as const
-
-// export const updateNewPostTextActionCreator = (text: string) => ({
-//     type: UPDATE_NEW_POST_TEXT,
-//     newText: text
-// }) as const
-
 export const setMyStatus = (status: string) => ({type: GET_MY_STATUS, status}) as const
 
 
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
+    let response = await usersAPI.getProfile(userId);
+    dispatch(setUserProfile(response.data))
 
-
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) =>{
-    usersAPI.getProfile(userId).then(response => {
-        dispatch(setUserProfile(response.data))
-    })
 }
 
-export const setStatus = (userId: string) => (dispatch: Dispatch) =>{
-    profileAPI.getStatus(userId).then(response => {
+export const setStatus = (userId: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userId);
         dispatch(setMyStatus(response.data))
-    })
 }
 
-export const updateStatus = (status: string) => (dispatch: Dispatch) =>{
-    profileAPI.updateStatus(status).then(response => {
-        if(response.data.resultCode === 0) {
-
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+   let response = await profileAPI.updateStatus(status);
+           if (response.data.resultCode === 0) {
             dispatch(setMyStatus(status))
         }
-
-
-
-    })
 }
 
 export default profileReducer;

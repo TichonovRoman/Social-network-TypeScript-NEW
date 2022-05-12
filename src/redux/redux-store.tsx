@@ -2,9 +2,7 @@ import React from "react"
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer, {
     addPostActionCreator, deletePostActionCreator, setMyStatus,
-    setStatus,
     setUserProfile,
-
 } from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator} from "./dialogs-reducer";
 import friendsReducer from "./friends-reducer";
@@ -16,7 +14,6 @@ import usersReducer, {
     unfollowSuccess
 } from "./users-reducer";
 import authReducer, {resetAuthDataAC, setAuthUserData} from "./auth-reducer";
-
 
 import thunkMiddleware from "redux-thunk"
 import appReducer, {initializedSuccessAC} from "./app-reducer";
@@ -35,7 +32,6 @@ export type AppStateType = ReturnType<typeof rootReducers>
 
 let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
 
-
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     // | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof addMessageActionCreator>
@@ -53,8 +49,5 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setMyStatus>
     | ReturnType<typeof resetAuthDataAC>
     | ReturnType<typeof initializedSuccessAC>;
-
-
-
 
 export default store

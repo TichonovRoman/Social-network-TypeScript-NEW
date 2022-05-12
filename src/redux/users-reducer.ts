@@ -47,23 +47,21 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersPageType
     switch (action.type) {
 
         case FOLLOW:
-            return  {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)}
-
+            return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: true} : u)}
         case UNFOLLOW:
             return {...state, users: state.users.map(u => u.id === action.userID ? {...u, followed: false} : u)}
-
-
         case SET_CURRENT_PAGE:
         case SET_USERS:
         case SET_TOTAL_USERS_COUNT:
         case TOOGLE_IS_FETCHING:
             return {...state, ...action.payload}
-
         case TOOGLE_IS_FOLLOWING_PROGRESS:
-            return {...state,
+            return {
+                ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)}
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
 
         default:
             return state
@@ -73,62 +71,60 @@ const usersReducer = (state = initialState, action: ActionsTypes): UsersPageType
 }
 
 export const followSuccess = (userID: string) => ({type: FOLLOW, userID}) as const
-export const unfollowSuccess  = (userID: string) => ({type: UNFOLLOW, userID}) as const
+export const unfollowSuccess = (userID: string) => ({type: UNFOLLOW, userID}) as const
 export const setUsers = (users: any) => ({type: SET_USERS, payload: {users}}) as const
 export const setCurrentPage = (currentPage: number) => ({type: SET_CURRENT_PAGE, payload: {currentPage}}) as const
-export const setTotalUsersCount = (totalUsersCount: number) => ({type: SET_TOTAL_USERS_COUNT, payload: {totalUsersCount}}) as const
+export const setTotalUsersCount = (totalUsersCount: number) => ({
+    type: SET_TOTAL_USERS_COUNT,
+    payload: {totalUsersCount}
+}) as const
 export const toogleIsFetching = (isFetching: boolean) => ({type: TOOGLE_IS_FETCHING, payload: {isFetching}}) as const
-export const toogleFollowingProgress = (isFetching : boolean, userId: string) => ({type: TOOGLE_IS_FOLLOWING_PROGRESS, isFetching, userId}) as const
+export const toogleFollowingProgress = (isFetching: boolean, userId: string) => ({
+    type: TOOGLE_IS_FOLLOWING_PROGRESS,
+    isFetching,
+    userId
+}) as const
 
 
-export const requestUsers = (page: number, pageSize: number)  => {
-    return (dispatch: Dispatch) => {
-    dispatch(toogleIsFetching(true))
+export const requestUsers = (page: number, pageSize: number) => {
+    return async (dispatch: Dispatch) => {
+        dispatch(toogleIsFetching(true))
         dispatch(setCurrentPage(page))
-    usersAPI.getUsers(page, pageSize).then(data => {
+        let response = await usersAPI.getUsers(page, pageSize);
         dispatch(toogleIsFetching(false))
-        dispatch(setUsers(data.items))
-        dispatch(setTotalUsersCount(data.totalCount))
-    })
-        .catch(() => alert("Failed to get users"))
+        dispatch(setUsers(response.items))
+        dispatch(setTotalUsersCount(response.totalCount))
 
-}}
+    }
+}
 
-export const follow = (userId: string)  => {
-    return (dispatch: Dispatch) => {
+export const follow = (userId: string) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toogleIsFetching(true))
         dispatch(toogleFollowingProgress(true, userId))
-        usersAPI.follow(userId).then(data => {
+        let response = await usersAPI.follow(userId);
+        dispatch(toogleIsFetching(false))
+        if (response.resultCode == 0) {
+            dispatch(followSuccess(userId))
+        }
+        dispatch(toogleFollowingProgress(false, userId))
+    }
+}
 
-            dispatch(toogleIsFetching(false))
-            if (data.resultCode == 0) {
-                dispatch(followSuccess (userId))
-            }
-            dispatch(toogleFollowingProgress(false, userId))
-
-        })
-            .catch(() => alert("Failed to follow users"))
-
-}}
-
-export const unfollow = (userId: string)  => {
-    return (dispatch: Dispatch) => {
+export const unfollow = (userId: string) => {
+    return async (dispatch: Dispatch) => {
         dispatch(toogleIsFetching(true))
         dispatch(toogleFollowingProgress(true, userId))
-        usersAPI.unfollow(userId).then(data => {
 
-            dispatch(toogleIsFetching(false))
-            if (data.resultCode == 0) {
-                dispatch(unfollowSuccess (userId))
-            }
-            dispatch(toogleFollowingProgress(false, userId))
-        })
-            .catch(() => alert("Failed to unfollow users"))
+        let response = await usersAPI.unfollow(userId);
+        dispatch(toogleIsFetching(false))
 
-}}
-
-
-
+        if (response.resultCode == 0) {
+            dispatch(unfollowSuccess(userId))
+        }
+        dispatch(toogleFollowingProgress(false, userId))
+    }
+}
 
 
 export default usersReducer;

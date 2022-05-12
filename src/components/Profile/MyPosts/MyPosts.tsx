@@ -5,15 +5,15 @@ import {PostsPropsType} from "./MyPostsContainer";
 import {AddMessageForm} from "../../universalTextarea/MessageForm";
 
 
-const MyPosts = React.memo((props: PostsPropsType) => {
+const MyPosts = React.memo(({posts, addPost}: PostsPropsType) => {
 
-    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <AddMessageForm onSubmit={props.addPost}
+                <AddMessageForm onSubmit={addPost}
                                 placeholderText={"Enter your post"}
                                 textMaxLength={100}
                 />

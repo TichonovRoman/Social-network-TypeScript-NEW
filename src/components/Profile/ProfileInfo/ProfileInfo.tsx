@@ -2,7 +2,6 @@ import React from 'react';
 import imgPicture from "../../../img/SunFlower.jpg";
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 export type ProfileInfoPropsType = {
@@ -21,31 +20,22 @@ export type ProfileInfoPropsType = {
     status: string,
     updateStatus: (status: string) => void
 
-
 }
 
-
-
-
-const ProfileInfo = (props: ProfileInfoPropsType) => {
-    if(!props.profile) { return <Preloader/>}
+const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsType) => {
+    if(!profile) { return <Preloader/>}
     return (
-
         <div>
-
             <div>
                 <img className={s.sunflowerImg} src={imgPicture}/>
             </div>
-
-
             <div className={s.descriptionBlock}>
-                 <img src={props.profile.photos.large}/>
+                 <img src={profile.photos.large}/>
                 <div>
-                    Меня зовут: {props.profile.fullName}
-                   <div>Обо мне: {props.profile.aboutMe}</div>
+                    Меня зовут: {profile.fullName}
+                   <div>Обо мне: {profile.aboutMe}</div>
                 </div>
-                {/*<ProfileStatus status = {props.status} updateStatus = {props.updateStatus}/>*/}
-                <ProfileStatusWithHooks status = {props.status} updateStatus = {props.updateStatus}/>
+                  <ProfileStatusWithHooks status = {status} updateStatus = {updateStatus}/>
             </div>
         </div>
     );

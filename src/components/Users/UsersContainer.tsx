@@ -64,7 +64,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    currentPage={this.props.currentPage}
                    users={this.props.users}
 
-
                    followingInProgress = {this.props.followingInProgress}
                    follow = {this.props.follow}
                    unfollow = {this.props.unfollow}
@@ -73,20 +72,6 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     }
 }
-
-// let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress,
-//
-//
-//     }
-// }
-
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
         users: getUsers(state),

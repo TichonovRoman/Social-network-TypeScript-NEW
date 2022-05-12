@@ -7,13 +7,6 @@ import {AppStateType} from "../../redux/redux-store";
 
 import {compose} from "redux";
 
-// type ProfilePropsType = {
-//     posts: Array<PostsDataType>
-//     dispatch: (action: ActionsTypes) => void
-//     newPostText: string
-//
-// }
-
 type PathParamsType = {
     userId: string,
 }
@@ -54,17 +47,13 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             userId= this.props.authorizedUserId ? this.props.authorizedUserId.toString() : ""
             if(!userId) this.props.history.push("/login")
-
         }
         this.props.getUserProfile(userId)
         this.props.setStatus(userId)
-
     }
 
     render() {
-        // if (!this.props.isAuth) return <Redirect to={"/login"}/>
-
-        return (
+              return (
             <Profile profile={this.props.profile} status = {this.props.status} updateStatus = {this.props.updateStatus}/>
         );
     }
