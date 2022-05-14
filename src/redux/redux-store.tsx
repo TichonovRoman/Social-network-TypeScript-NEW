@@ -1,5 +1,5 @@
 import React from "react"
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer, {
     addPostActionCreator, deletePostActionCreator, setMyStatus,
     setUserProfile,
@@ -30,7 +30,15 @@ export const rootReducers = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducers>
 
-let store = createStore(rootReducers, applyMiddleware(thunkMiddleware))
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunkMiddleware)))
 
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     // | ReturnType<typeof updateNewPostTextActionCreator>
