@@ -6,12 +6,16 @@ import {HashRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+// import DialogsContainer from "./components/Dialogs/DialogsContainer";
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 import {connect, Provider, ReactReduxContext} from "react-redux";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+// import Login from "./components/Login/Login";
+const Login = React.lazy(() => import('./components/Login/Login'));
+
 import {initializeApp} from "./redux/app-reducer";
 import store, {AppStateType} from "./redux/redux-store";
 import Preloader from "./components/common/Preloader/Preloader";
@@ -43,6 +47,7 @@ class App extends React.Component<AppPropsType> {
                 </ReactReduxContext.Consumer>
                 <div className="app-wrapper-content">
                     <>
+                        <React.Suspense fallback={<Preloader/>}>
                         <Route path={"/dialogs"} component={DialogsContainer}/>
                         <Route path={"/profile/:userId?"} component={ProfileContainer}/>
                         <Route path={"/users"} component={UsersContainer}/>
@@ -50,6 +55,7 @@ class App extends React.Component<AppPropsType> {
                         <Route path={"/music"} component={Music}/>
                         <Route path={"/settings"} component={Settings}/>
                         <Route path={"/login"} component={Login}/>
+                        </React.Suspense>
                     </>
                 </div>
                 <Footer/>

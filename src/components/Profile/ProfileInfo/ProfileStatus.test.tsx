@@ -44,19 +44,13 @@ describe("ProfileStatus component", () => {
         expect(input.props.value).toBe("Social Network");
     });
 
-
-
     test("callback should be called", () => {
         const mockCallback = jest.fn()
         const component = create(<ProfileStatus status="Social Network" updateStatus={mockCallback} />);
         const instance = component.getInstance();
         // @ts-ignore
         instance?.deactivateEditMode();
-
         expect(mockCallback.mock.calls.length).toBe(1);
-
-
-
 
     });
 
