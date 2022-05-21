@@ -2,11 +2,14 @@ import axios from "axios";
 import {initialValuesType} from "../components/Login/Login";
 
 
+
 const instance = axios.create({
+
         baseURL: `https://social-network.samuraijs.com/api/1.0/`,
         withCredentials: true,
         headers: {
             "API-KEY": "cdcf9189-0a6c-4ea6-a766-22c26d9d1d3e"
+            // "API-KEY": process.env.PUBLIC_URL
         }
     }
 )
