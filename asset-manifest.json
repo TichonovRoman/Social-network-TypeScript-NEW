@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/Social-network-TypeScript-NEW/static/css/main.14c6e3a6.css",
+    "main.js": "/Social-network-TypeScript-NEW/static/js/main.0faa5467.js",
+    "static/css/772.76f1e318.chunk.css": "/Social-network-TypeScript-NEW/static/css/772.76f1e318.chunk.css",
+    "static/js/772.fc8733e5.chunk.js": "/Social-network-TypeScript-NEW/static/js/772.fc8733e5.chunk.js",
+    "static/css/528.2b744721.chunk.css": "/Social-network-TypeScript-NEW/static/css/528.2b744721.chunk.css",
+    "static/js/528.a7d650fe.chunk.js": "/Social-network-TypeScript-NEW/static/js/528.a7d650fe.chunk.js",
+    "static/js/944.0907ff42.chunk.js": "/Social-network-TypeScript-NEW/static/js/944.0907ff42.chunk.js",
+    "static/js/787.cfd8f164.chunk.js": "/Social-network-TypeScript-NEW/static/js/787.cfd8f164.chunk.js",
+    "static/js/705.35499057.chunk.js": "/Social-network-TypeScript-NEW/static/js/705.35499057.chunk.js",
+    "static/media/SunFlower.jpg": "/Social-network-TypeScript-NEW/static/media/SunFlower.d7988829e86cf100f5f3.jpg",
+    "static/media/FotoNotFound.jpg": "/Social-network-TypeScript-NEW/static/media/FotoNotFound.b49b08e3765b00a95ec9.jpg",
+    "static/media/Hourglass.gif": "/Social-network-TypeScript-NEW/static/media/Hourglass.6b6bb1cbe86ddca8316a.gif",
+    "index.html": "/Social-network-TypeScript-NEW/index.html",
+    "main.14c6e3a6.css.map": "/Social-network-TypeScript-NEW/static/css/main.14c6e3a6.css.map",
+    "main.0faa5467.js.map": "/Social-network-TypeScript-NEW/static/js/main.0faa5467.js.map",
+    "772.76f1e318.chunk.css.map": "/Social-network-TypeScript-NEW/static/css/772.76f1e318.chunk.css.map",
+    "772.fc8733e5.chunk.js.map": "/Social-network-TypeScript-NEW/static/js/772.fc8733e5.chunk.js.map",
+    "528.2b744721.chunk.css.map": "/Social-network-TypeScript-NEW/static/css/528.2b744721.chunk.css.map",
+    "528.a7d650fe.chunk.js.map": "/Social-network-TypeScript-NEW/static/js/528.a7d650fe.chunk.js.map",
+    "944.0907ff42.chunk.js.map": "/Social-network-TypeScript-NEW/static/js/944.0907ff42.chunk.js.map",
+    "787.cfd8f164.chunk.js.map": "/Social-network-TypeScript-NEW/static/js/787.cfd8f164.chunk.js.map",
+    "705.35499057.chunk.js.map": "/Social-network-TypeScript-NEW/static/js/705.35499057.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.14c6e3a6.css",
+    "static/js/main.0faa5467.js"
+  ]
+}
