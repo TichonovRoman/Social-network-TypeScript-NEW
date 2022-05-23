@@ -3,6 +3,7 @@ import imgPicture from "../../../img/SunFlower.jpg";
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import NotFoundFoto from "../../../img/FotoNotFound.jpg";
 
 export type ProfileInfoPropsType = {
     profile: {
@@ -30,7 +31,12 @@ const ProfileInfo = ({profile, status, updateStatus}: ProfileInfoPropsType) => {
                 <img className={s.sunflowerImg} src={imgPicture}/>
             </div>
             <div className={s.descriptionBlock}>
-                 <img src={profile.photos.large}/>
+
+                 <img
+                     src={profile.photos.large || NotFoundFoto}
+                     className={s.mainPhoto}
+                 />
+
                 <div>
                     Меня зовут: {profile.fullName}
                    <div>Обо мне: {profile.aboutMe}</div>

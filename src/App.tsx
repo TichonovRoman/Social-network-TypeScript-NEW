@@ -26,12 +26,9 @@ type AppPropsType = {
 }
 
 class App extends React.Component<AppPropsType> {
-
-
     componentDidMount() {
        this.props.initializeApp()
     }
-
     render() {
         if(!this.props.initialized) {
             return <Preloader/>
@@ -66,12 +63,9 @@ class App extends React.Component<AppPropsType> {
         );
     }
 }
-
 const mapStateToProps = (state: AppStateType) => ({
     initialized: state.app.initialized
 })
-
-
 let AppContainer = connect(mapStateToProps, {initializeApp}) (App);
 
 const SamuraiJSApp = () => {
