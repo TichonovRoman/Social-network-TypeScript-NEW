@@ -1,7 +1,7 @@
 import React from "react"
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profileReducer, {
-    addPostActionCreator, deletePostActionCreator, setMyStatus,
+    addPostActionCreator, deletePostActionCreator, savePhotoSuccess, setMyStatus,
     setUserProfile,
 } from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator} from "./dialogs-reducer";
@@ -56,6 +56,7 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof toogleFollowingProgress>
     | ReturnType<typeof setMyStatus>
     | ReturnType<typeof resetAuthDataAC>
-    | ReturnType<typeof initializedSuccessAC>;
+    | ReturnType<typeof initializedSuccessAC>
+    | ReturnType<typeof savePhotoSuccess>;
 
 export default store
