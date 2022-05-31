@@ -6,6 +6,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 
 import {compose} from "redux";
+import {ProfileInfoType} from "./ProfileInfo/ProfileInfo";
 
 type PathParamsType = {
     userId: string,
@@ -21,18 +22,7 @@ type MapDispatchPropsType = {
     savePhoto: (file: object) => void,
 }
 type MapStatePropsType = {
-    profile: {
-        "aboutMe": string,
-        "contacts": {},
-        "lookingForAJob": boolean,
-        "lookingForAJobDescription": string,
-        "fullName": string,
-        "userId": number,
-        photos: {
-            small: string,
-            large: string,
-        }
-    },
+    profile: ProfileInfoType | null,
     // isAuth: boolean
     status: string,
     authorizedUserId: number | null,

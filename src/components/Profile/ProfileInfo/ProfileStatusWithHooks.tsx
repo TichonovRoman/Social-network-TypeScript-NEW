@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type ProfileStatusWithHooksType = {
     status: string,
@@ -11,7 +11,7 @@ const ProfileStatusWithHooks = (props: ProfileStatusWithHooksType) => {
     let [status, setStatus] = useState(props.status)
     let [spanOn, setSpanOn] = useState(true)
 
-    useEffect(()=>{
+    useEffect(() => {
         setStatus(props.status)
     }, [props.status])
 
@@ -29,7 +29,10 @@ const ProfileStatusWithHooks = (props: ProfileStatusWithHooksType) => {
     return <div>
         {spanOn
             ? <div>
-                <span onDoubleClick={activateMode}>{status || "-------"}</span></div>
+                <b>Мой статус: </b>
+                    <span onDoubleClick={activateMode}>{status || "-------"}</span>
+
+            </div>
             : <div>
                 <input
                     onChange={onChangeHandler}

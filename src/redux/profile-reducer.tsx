@@ -2,6 +2,7 @@ import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {ProfileInfoPropsType, ProfileInfoType} from "../components/Profile/ProfileInfo/ProfileInfo";
 
 export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
@@ -14,7 +15,7 @@ export const PROFILE_PHOTO_SUCCESS = `PROFILE_PHOTO_SUCCESS`
 export type ProfilePageType = {
     posts: Array<PostsDataType>,
     // newPostText: string,
-    profile: any,
+    profile: ProfileInfoType | null,
     status: string,
 
 }
@@ -43,10 +44,6 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
             }
             const newState = {...state, posts: [...state.posts, newPost]}
             return newState;
-
-        // case UPDATE_NEW_POST_TEXT:
-        //     return {...state, newPostText: action.newText}
-
         case DELETE_POST:
             return {...state, posts: [...state.posts.filter(p => p.id != action.postId)]}
         case SET_USER_PROFILE:
@@ -64,9 +61,12 @@ const profileReducer = (state = initialState, action: ActionsTypes): ProfilePage
 
 export const addPostActionCreator = (text: string) => ({type: ADD_POST, text}) as const
 export const deletePostActionCreator = (postId: number) => ({type: DELETE_POST, postId}) as const
-export const setUserProfile = (profile: any) => ({type: SET_USER_PROFILE, profile}) as const
+export const setUserProfile = (profile: ProfileInfoType) => ({type: SET_USER_PROFILE, profile}) as const
 export const setMyStatus = (status: string) => ({type: GET_MY_STATUS, status}) as const
-export const savePhotoSuccess = (photos: string) => ({type: PROFILE_PHOTO_SUCCESS, photos}) as const
+export const savePhotoSuccess = (photos: {
+    small: string,
+    large: string,
+}) => ({type: PROFILE_PHOTO_SUCCESS, photos}) as const
 
 
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
