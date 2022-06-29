@@ -22,7 +22,7 @@ type MapDispatchPropsType = {
     savePhoto: (file: object) => void,
 }
 type MapStatePropsType = {
-    profile: ProfileInfoType | null,
+    profile: ProfileInfoType,
     // isAuth: boolean
     status: string,
     authorizedUserId: number | null,

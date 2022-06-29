@@ -5,31 +5,31 @@ import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import NotFoundFoto from "../../../img/FotoNotFound.jpg";
 //
-// export type ProfileInfoType ={
-//         "aboutMe": string,
-//         "contacts": {
-//             "github": string,
-//             "vk": string,
-//             "facebook": string,
-//             "instagram": string,
-//             "twitter": string,
-//             "website": string,
-//             "youtube": string,
-//             "mainLink": string,
-//         },
-//         "lookingForAJob": boolean,
-//         "lookingForAJobDescription": string,
-//         "fullName": string,
-//         "userId": number,
-//         photos: {
-//             small: string,
-//             large: string,
-//         }
-// }
+export type ProfileInfoType ={
+        "aboutMe": string,
+        "contacts": {
+            "github": string,
+            "vk": string,
+            "facebook": string,
+            "instagram": string,
+            "twitter": string,
+            "website": string,
+            "youtube": string,
+            "mainLink": string,
+        },
+        "lookingForAJob": boolean,
+        "lookingForAJobDescription": string,
+        "fullName": string,
+        "userId": number,
+        photos: {
+            small: string,
+            large: string,
+        }
+}
 
 export type ProfileInfoPropsType = {
     // profile: ProfileDataType,
-    profile: any,
+    profile: ProfileInfoType,
     status: string,
     updateStatus: (status: string) => void,
     isOwner: boolean,

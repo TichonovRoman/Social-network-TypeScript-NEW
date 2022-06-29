@@ -2,7 +2,7 @@ import {PostsDataType} from "../components/Profile/MyPosts/MyPostsContainer";
 import {ActionsTypes} from "./redux-store";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
-import {ProfileInfoPropsType, ProfileInfoType} from "../components/Profile/ProfileInfo/ProfileInfo";
+import {ProfileInfoType} from "../components/Profile/ProfileInfo/ProfileInfo";
 
 export const ADD_POST = `ADD-POST`
 export const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`
@@ -15,7 +15,7 @@ export const PROFILE_PHOTO_SUCCESS = `PROFILE_PHOTO_SUCCESS`
 export type ProfilePageType = {
     posts: Array<PostsDataType>,
     // newPostText: string,
-    profile: ProfileInfoType | null,
+    profile: ProfileInfoType,
     status: string,
 
 }
@@ -28,7 +28,27 @@ let initialState: ProfilePageType = {
         {id: 4, message: "Cool", likesCount: 20},
     ] as Array<PostsDataType>,
     // newPostText: 'it-kamasutra.com' as string,
-    profile: null,
+    profile: {
+        "aboutMe": "",
+        "contacts": {
+            "github": "",
+            "vk": "",
+            "facebook": "",
+            "instagram": "",
+            "twitter": "",
+            "website": "",
+            "youtube": "",
+            "mainLink": "",
+        },
+        "lookingForAJob": false,
+        "lookingForAJobDescription": "",
+        "fullName": "",
+        "userId": 0,
+        photos: {
+            small: "",
+            large: "",
+        }
+    },
     status: ""
 
 }

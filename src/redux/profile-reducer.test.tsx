@@ -8,7 +8,27 @@ let initialState: ProfilePageType = {
         {id: 4, message: "Cool", likesCount: 20},
     ],
 
-    profile: null,
+        profile: {
+            "aboutMe": "",
+            "contacts": {
+                "github": "",
+                "vk": "",
+                "facebook": "",
+                "instagram": "",
+                "twitter": "",
+                "website": "",
+                "youtube": "",
+                "mainLink": "",
+            },
+            "lookingForAJob": false,
+            "lookingForAJobDescription": "",
+            "fullName": "",
+            "userId": 0,
+            photos: {
+                small: "",
+                large: "",
+            }
+        },
     status: ""
 }
 
