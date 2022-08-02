@@ -1,18 +1,15 @@
 import React from "react";
 import {useFormik} from "formik";
-import axios from "axios";
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
-import {authAPI} from "../../api/api";
+import {login} from "redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "redux/redux-store";
 
 export type initialValuesType = {
     email: string,
     password: string,
     rememberMe: boolean,
     captcha: boolean,
-
 }
 
 type ErrorsType = {

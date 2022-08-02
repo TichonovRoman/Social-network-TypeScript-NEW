@@ -15,7 +15,7 @@ type NavbarType = {
 
 const Navbar: React.FC<NavbarType> = (props) => {
 
-    let friendsList = props.friends.map(m => <div key={m.id} className={s.friends}><img src={m.avatar}/>{m.name}</div>)
+    let friendsList = props.friends.map(m => <div key={m.id} className={s.friends}><img alt='avatar' src={m.avatar}/>{m.name}</div>)
 
     const finalClass = (isActive: boolean) => isActive ? `${s.item} ${s.activeLink}` : `${s.item}`
 
