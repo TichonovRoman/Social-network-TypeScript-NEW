@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import { ProfileInfoType } from "./ProfileInfo";
 
 type initialValuesType = {
   fullName: string;
@@ -29,7 +30,12 @@ const validate = (values: initialValuesType) => {
   return errors;
 };
 
-export const ProfileDataForm = ({ profile }: any) => {
+export type ProfileDataForm = {
+  profile: ProfileInfoType,
+  saveProvile: (profile: any) => void,
+}
+
+export const ProfileDataForm = ({ profile, saveProvile }: ProfileDataForm) => {
   const formik = useFormik({
     initialValues: {
       fullName: "",

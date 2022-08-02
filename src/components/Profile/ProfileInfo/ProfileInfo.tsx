@@ -35,6 +35,7 @@ export interface ProfileInfoPropsType {
   updateStatus: (status: string) => void;
   isOwner: boolean;
   savePhoto: (file: object) => void;
+  saveProfile: (profile: any) => void,
 }
 
 const ProfileInfo = ({
@@ -43,6 +44,7 @@ const ProfileInfo = ({
   updateStatus,
   isOwner,
   savePhoto,
+  saveProfile
 }: ProfileInfoPropsType) => {
   const [editMode, setEditMode] = useState(false);
 
@@ -80,7 +82,7 @@ const ProfileInfo = ({
         )}
 
         {editMode ? (
-          <ProfileDataForm profile={profile} />
+          <ProfileDataForm profile={profile} saveProvile={saveProfile}/>
         ) : (
           <ProfileData
             profile={profile}
